@@ -1,0 +1,78 @@
+<div class="w-ful h-full bg-white/80 flex justify-center items-center">
+        <div class="rounded-md shadow-xl bg-white w-1/4 ">
+
+            <div class="flex justify-between border-b-2 p-3 ">
+                <div>
+                    <h1 class="font-bold text-2xl">Sign Up</h1>
+                    <p>It's quick and easy.</p>
+                </div>
+                <div>
+                    <button (click)="closeCreateAccount()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-3">
+                <form [formGroup]="registerForm"  >
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <input formControlName="first_name" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="First name" type="text" >
+                        <input formControlName="surname" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="Surname" type="text" >
+                    </div>
+
+                    <div class="grid grid-rows-2 gap-2 mb-3">
+                        <input formControlName="email" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="Mobile number or email address" type="text">
+                        <input formControlName="password" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="New Password" type="text">
+                    </div>
+                    
+                    <div>
+                        <p class="block text-sm text-gray-600">Date of birth</p>
+                        <div class="grid grid-cols-3 gap-2">
+                            <select class="border py-1 px-2 rounded-md">
+                                <option value="">5</option>
+                                <option value="">5</option>
+                                <option value="">5</option>
+                            </select>
+                            <select class="border py-1 px-2 rounded-md">
+                                <option value="">5</option>
+                                <option value="">5</option>
+                                <option value="">5</option>
+                            </select>
+                            <select class="border py-1 px-2 rounded-md">
+                                <option value="">5</option>
+                                <option value="">5</option>
+                                <option value="">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="block text-sm text-gray-600">Gender</p>
+                        <div class="flex justify-between">
+                            <span class="border px-1 py-1 flex items-center rounded-md">
+                                <label class="pr-4" for="Female">Female</label>
+                                <input type="radio" name="option" id="Female">
+                            </span>
+                            <span class="border px-1 py-1 flex items-center rounded-md">
+                                <label class="pr-4" for="Male">Male</label>
+                                <input type="radio" name="option" id="Male">
+                            </span>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="p-3">
+                <p class="text-[11px]">People who use our service may have uploaded your contact information to Facebook. Learn more.</p>
+                <p class="text-[11px]">By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS notifications from us and can opt out at any time.</p>
+            </div>
+            <div class="p-3 text-center w-full mb-5">
+                <button (click)="register()" class="bg-green-600 text-white font-bold py-1 px-14 rounded-md">Sign Up</button>
+            </div>
+            
+
+        </div>
+
+</div>

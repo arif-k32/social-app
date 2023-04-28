@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataSupplyService } from '../shared/services/data-supply.service';
+import { DataSupplyService } from '../../../../shared/services/data-supply.service';
 
 @Component({
   selector: 'app-posts',

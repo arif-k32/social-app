@@ -46,7 +46,17 @@ export class DataSupplyService {
       ]
     }
   ]
- 
+
+  userDb=[
+            {
+              email:'v@v.com',
+              password:'2356'
+            },
+            {
+              email:'john@gmail.com',
+              password:'asdf'
+            }
+          ]
 
   
 }
