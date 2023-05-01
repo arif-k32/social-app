@@ -15,7 +15,7 @@ export class RegisterComponent {
                                                       surname: new FormControl('',Validators.required),
                                                       email: new FormControl('',[Validators.required, Validators.email]),
                                                       password: new FormControl('',Validators.required),
-                                                      dob: new FormControl('',Validators.required),
+                                                      dob: new FormControl(''),
                                                       gender: new FormControl('',Validators.required),
                                                     })
 
@@ -35,5 +35,10 @@ export class RegisterComponent {
                                                                       }
                                                                 })
     }
+    public getEmailValidators():boolean{
+      return (  this.registerForm.controls['email'].errors?.['email'] || this.registerForm.controls['email'].errors?.['required']) && this.registerForm.controls['email'].touched
+    
+    }
+    
 }
 

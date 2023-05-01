@@ -18,13 +18,36 @@
             <div class="p-3">
                 <form [formGroup]="registerForm"  >
                     <div class="grid grid-cols-2 gap-2 mb-2">
-                        <input formControlName="first_name" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="First name" type="text" >
-                        <input formControlName="surname" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="Surname" type="text" >
+                        <div class="relative flex items-center ">
+                            <input formControlName="first_name" [ngClass]="{'border-red-500':registerForm.controls['first_name'].errors?.['required'] && registerForm.controls['first_name'].touched}" class="border py-2 px-2  w-full rounded-md bg-gray-100" placeholder="First name" type="text" >
+                            <svg  *ngIf="registerForm.controls['first_name'].errors?.['required'] && registerForm.controls['first_name'].touched" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                            </svg>
+                        </div>
+
+                        <div class="relative flex items-center ">
+                            <input formControlName="surname" [ngClass]="{'border-red-500':registerForm.controls['surname'].errors?.['required'] && registerForm.controls['surname'].touched}" class="w-full border py-2 px-2 rounded-md bg-gray-100" placeholder="Surname" type="text" >
+                            <svg  *ngIf="registerForm.controls['surname'].errors?.['required'] && registerForm.controls['surname'].touched" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                            </svg>
+                        </div>
+                        
+                        
                     </div>
 
                     <div class="grid grid-rows-2 gap-2 mb-3">
-                        <input formControlName="email" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="Mobile number or email address" type="text">
-                        <input formControlName="password" class="border py-2 px-2 rounded-md bg-gray-100" placeholder="New Password" type="text">
+                        <div class="relative flex items-center ">
+                            <input formControlName="email" [ngClass]="{'border-red-500':getEmailValidators()}" class="border py-2 px-2 rounded-md bg-gray-100 w-full" placeholder="Mobile number or email address" type="text">
+                            <svg  *ngIf="getEmailValidators()" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                            </svg>
+                        </div>
+                        <div class="relative flex items-center ">
+                            <input formControlName="password" [ngClass]="{'border-red-500':registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched}" class="border py-2 px-2 rounded-md bg-gray-100 w-full" placeholder="New Password" type="text">
+                            <svg  *ngIf="registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                            </svg>
+                        </div>
                     </div>
                     
                     <div>
@@ -52,11 +75,11 @@
                         <div class="flex justify-between">
                             <span class="border px-1 py-1 flex items-center rounded-md">
                                 <label class="pr-4" for="Female">Female</label>
-                                <input type="radio" name="option" id="Female">
+                                <input formControlName="gender" type="radio" name="gender" id="Female" value="f">
                             </span>
                             <span class="border px-1 py-1 flex items-center rounded-md">
                                 <label class="pr-4" for="Male">Male</label>
-                                <input type="radio" name="option" id="Male">
+                                <input formControlName="gender" type="radio" name="gender" id="Male" value="m" >
                             </span>
                         </div>
                     </div>
@@ -69,7 +92,7 @@
                 <p class="text-[11px]">By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS notifications from us and can opt out at any time.</p>
             </div>
             <div class="p-3 text-center w-full mb-5">
-                <button (click)="register()" class="bg-green-600 text-white font-bold py-1 px-14 rounded-md">Sign Up</button>
+                <button (click)="register()" [disabled]="!registerForm.valid" [ngClass]="{'opacity-80':!registerForm.valid}" class=" bg-green-600 text-white font-bold py-1 px-14 rounded-md">Sign Up</button>
             </div>
             
 

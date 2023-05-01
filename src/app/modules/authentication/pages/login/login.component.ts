@@ -10,10 +10,10 @@ import { ResponseService } from 'src/app/shared/services/response.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  public createAccount:boolean=false;
+  public createAccount:boolean=true;
   public loginForm:FormGroup = new FormGroup({
-                                                  email :new FormControl ('john@gmail.com',[Validators.required,Validators.email]),
-                                                  password: new FormControl('asdf',Validators.required)
+                                                  email :new FormControl ('',[Validators.required,Validators.email]),
+                                                  password: new FormControl('',Validators.required)
                                               })
 
   constructor(private readonly router:Router, private readonly response:ResponseService,private readonly loginHttp:LoginHttpService){}
@@ -37,6 +37,15 @@ export class LoginComponent {
                                                           }
 
                                                     });
+  }
+  public getEmailValidators():boolean{
+    return (  this.loginForm.controls['email'].errors?.['email'] || this.loginForm.controls['email'].errors?.['required']) && this.loginForm.controls['email'].touched
+  
+  }
+
+
+  ngOnInit():void{
+    console.log()
   }
 
   

@@ -6,14 +6,22 @@
         </div>
         <div class=" p-4 w-1/5 -mt-20  shadow-xl bg-white rounded-md">
             <form [formGroup]="loginForm" (ngSubmit)="login()" class="grid-rows-3 gap-2">
-                <div class='mb-2'>
-                    <input formControlName="email" class="mb-2  px-4 w-full rounded-md bg-white border py-3 " type="text" placeholder="Email or phone">
+                <div class='mb-2 relative flex items-center'>
+                    <input formControlName="email" [ngClass]="{'border-red-500':getEmailValidators()}" class="mb-2  px-4 w-full rounded-md bg-white border py-3 " type="text" placeholder="Email or phone">
+                    <!-- <p class="text-red-500 ml-1 absolute inset-y-0 z-20 right-0">Email  is required.</p> -->
+                    <svg *ngIf="getEmailValidators()" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                      
                 </div>
-                <div >
-                    <input formControlName="password" class="mb-3  px-4 w-full rounded-md bg-white border py-2 " type="password" placeholder="Password" >
+                <div class="mb-2 relative flex items-center">
+                    <input formControlName="password" [ngClass]="{'border-red-500':loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched}" class="  px-4 w-full rounded-md bg-white border py-2 " type="password" placeholder="Password" >
+                    <svg *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
                 </div>
                 <div class="w-full text-center  mb-2">
-                    <button [disabled]="!loginForm.valid" class="bg-blue-500 w-full rounded-md text-white font-bold py-3 ">Log in</button>
+                    <button [disabled]="!loginForm.valid" [ngClass]="{'opacity-80':!loginForm.valid}" class="bg-blue-500 w-full rounded-md text-white font-bold py-3 ">Log in</button>
                 </div>
                 <div class="w-full text-center border-b-2 pb-6 mb-6">
                     <p class="text-blue-400">Forgotten password?</p>
@@ -22,7 +30,7 @@
             </form>
 
             <div class="w-full text-center mt-3">
-                <button (click)="toggleCreateAccount()" type="submit" class="bg-green-500 px-2 rounded-md text-white font-bold py-3 ">Create new account</button>
+                <button (click)="toggleCreateAccount()" type="submit" class="bg-green-500 px-2 rounded-md text-white font-bold py-3  cursor-pointer">Create new account</button>
             </div>
         </div>
 
