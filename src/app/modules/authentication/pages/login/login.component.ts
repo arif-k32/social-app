@@ -10,7 +10,7 @@ import { ResponseService } from 'src/app/shared/services/response.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  public createAccount:boolean=true;
+  public createAccount:boolean=false;
   public loginForm:FormGroup = new FormGroup({
                                                   email :new FormControl ('',[Validators.required,Validators.email]),
                                                   password: new FormControl('',Validators.required)
