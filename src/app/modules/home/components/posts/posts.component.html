@@ -46,6 +46,6 @@
 
     </div>
     <div *ngIf="postPhoto" class="fixed z-10 w-screen h-screen top-0 bottom-0 right-0 left-0">
-        <app-post-photo></app-post-photo>
+        <app-post-photo (close)="togglePostPhoto()"></app-post-photo>
     </div>
 </div>

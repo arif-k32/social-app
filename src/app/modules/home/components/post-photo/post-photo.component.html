@@ -1,20 +1,36 @@
 <div class="bg-black/50 w-full h-full text-black flex items-center justify-center relative">
-    <div class="right-2 fixed top-2 text-white">
+    <div (click)="closeNewPost()" class="right-2 fixed top-2 text-white cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
     </div>
-    <div class="w-1/3 aspect-square bg-white rounded-lg shadow-lg">
+    <div  class="w-1/3 aspect-square bg-white rounded-lg shadow-lg">
         <div class="border-b h-[7%] p-1 font-medium text-center">
             <p>Create new post</p>
         </div>
-        <div class=" p-3 h-[93%] w-full flex justify-center items-center">
-            <div class="flex flex-col items-center space-y-4">
+        <div *ngIf="!newPostImage" (drop)="onDropFile($event)" (dragover)="onFileDragOver($event)" (dragleave)="onFileDragLeave($event)" class=" p-3 h-[93%] w-full flex flex-col space-y-4 justify-center items-center">
                 <img class="" src="/assets/upload-photos-videos.png" alt="upload-photos-videos">
                 <h2>Drag photos and videos here</h2>
-                <button class="bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded-md text-white">Select from computer</button>
+                <label class="bg-blue-500 hover:bg-blue-600 py-1 px-4 rounded-md text-white" for="upload-photos-videos">
+                    Select from computer
+                    <input (change)="onSelectFile($event)" class="hidden" type="file" name="upload-photos-videos" id="upload-photos-videos" >
+                </label>
+        </div>
+        <div *ngIf="newPostImage" class=" p-3 h-[93%] w-full flex flex-col">
+            <img #newPostImage  class="w-full h-[65%] object-cover" >
+            <form [formGroup]="captionForm" class="w-full h-[20%]" >
+                <textarea formControlName="caption" class="w-full h-full mt-1 p-2 border" placeholder="Type a caption for your post here...." name="caption" id="caption"  rows="2"></textarea>
+            </form>
+            <div  class="mt-auto flex px-2 items-center justify-between">
+                <button (click)="toggleNewPostImage()" >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                </button>
+                <button (click)="sharePost()" class="text-blue-500 hover:text-blue-600 p-1 text-sm ">Share</button>
 
             </div>
+
         </div>
     </div>
 </div>

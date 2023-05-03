@@ -10,7 +10,7 @@ export class AuthenticationHttpService {
   constructor(private readonly httpClient:HttpClient, private readonly data:DataSupplyService) { }
 
   public isAuthorized():Observable<any>{
-    if(localStorage.getItem('access_token')=='true')
+    if(localStorage.getItem('access_token'))
         return of('true')
     return of('false');
 

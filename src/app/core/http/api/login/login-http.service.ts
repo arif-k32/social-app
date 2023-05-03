@@ -1,21 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataSupplyService } from 'src/app/shared/services/data-supply.service';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginHttpService {
 
-  constructor(private readonly httpClient:HttpClient, private readonly data:DataSupplyService) { }
+  constructor(private readonly httpClient:HttpClient) { }
 
-  public login(details:any):Observable<string>{
-    const index = this.data.userDb.findIndex((user:any)=> user.email == details.email && user.password == details.password)
-    if(index>=0){
-      return of('success')
-    }
-    else
-      return of('error')
+  public login(details:any):Observable<any>{
+    return this.httpClient.post(`${environment.api}/auth/login`,details);
   }
 
 

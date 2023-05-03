@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { LoginHttpService } from 'src/app/core/http/api/login/login-http.service';
-import { ResponseService } from 'src/app/shared/services/response.service';
 
 @Component({
   selector: 'app-login',
@@ -12,30 +10,22 @@ import { ResponseService } from 'src/app/shared/services/response.service';
 export class LoginComponent {
   public createAccount:boolean=false;
   public loginForm:FormGroup = new FormGroup({
-                                                  email :new FormControl ('john@gmail.com',[Validators.required,Validators.email]),
-                                                  password: new FormControl('asdf',Validators.required)
+                                                  email :new FormControl ('arif@email.com',[Validators.required,Validators.email]),
+                                                  password: new FormControl('2356',Validators.required)
                                               })
 
-  constructor(private readonly router:Router, private readonly response:ResponseService,private readonly loginHttp:LoginHttpService){}
+  constructor(private readonly router:Router, private readonly loginHttp:LoginHttpService){}
 
   
-  closeCreateAccountResponse:Subscription=this.response.getCloseCreateAccount().subscribe((response:string)=>{
-                                                                                        if(response=='close')
-                                                                                          this.toggleCreateAccount();
-                                                                                  });
-
+  
   
   public toggleCreateAccount():void{
       this.createAccount=!this.createAccount;
   }
   public login():void{
     this.loginHttp.login(this.loginForm.value).subscribe((response:any)=>{
-                                                          if(response == 'success'){
-                                                            console.log('login success');
-                                                            localStorage.setItem('access_token','true')
+                                                            localStorage.setItem('access_token',JSON.stringify(response.access_token))
                                                             this.router.navigate(['']);
-                                                          }
-
                                                     });
   }
   public getEmailValidators():boolean{
@@ -44,9 +34,7 @@ export class LoginComponent {
   }
 
 
-  ngOnInit():void{
-    console.log()
-  }
+  
 
   
 }

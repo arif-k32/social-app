@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterHttpService } from 'src/app/core/http/api/register/register-http.service';
-import { ResponseService } from 'src/app/shared/services/response.service';
 
 @Component({
   selector: 'app-register',
@@ -10,30 +9,30 @@ import { ResponseService } from 'src/app/shared/services/response.service';
 })
 export class RegisterComponent {
 
+    @Output ()  close:EventEmitter<null> = new EventEmitter<null>();
+
     public registerForm:FormGroup = new FormGroup ({
                                                       first_name: new FormControl ('',Validators.required),
-                                                      surname: new FormControl('',Validators.required),
+                                                      last_name: new FormControl('',Validators.required),
                                                       email: new FormControl('',[Validators.required, Validators.email]),
                                                       password: new FormControl('',Validators.required),
-                                                      dob: new FormControl(''),
+                                                      birthday: new FormControl(''),
                                                       gender: new FormControl('',Validators.required),
+                                                      username:new FormControl('',Validators.required)
                                                     })
 
-    constructor(private readonly router:Router, private readonly response:ResponseService, private readonly registerHttp:RegisterHttpService){}
+    constructor(private readonly router:Router,  private readonly registerHttp:RegisterHttpService){}
 
 
     public closeCreateAccount():void{
-      this.response.onCloseCreateAccount('close');
+        this.close.emit();
     }
 
     public register():void{
-      this.registerHttp.registerUser(this.registerForm.value).subscribe((response:any)=>{
-                                                                      if(response== 'success')
-                                                                      {
-                                                                        console.log('registration successful')
-                                                                        this.closeCreateAccount();
-                                                                      }
-                                                                })
+      if(this.registerForm.valid)
+          this.registerHttp.registerUser(this.registerForm.value).subscribe((response:any)=>{
+                                                                          this.close.emit();
+                                                                    })
     }
     public getEmailValidators():boolean{
       return (  this.registerForm.controls['email'].errors?.['email'] || this.registerForm.controls['email'].errors?.['required']) && this.registerForm.controls['email'].touched
