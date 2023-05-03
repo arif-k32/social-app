@@ -7,7 +7,7 @@ import { DataSupplyService } from '../../../../shared/services/data-supply.servi
 })
 export class PostsComponent {
   name='John';
-  public postPhoto=true;
+  public postPhoto=false;
   constructor(private readonly data:DataSupplyService){this.dat=data.users}
   dat!:any;
 
