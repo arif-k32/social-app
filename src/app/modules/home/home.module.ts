@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationHttpService } from 'src/app/core/http/api/authentication/authentication-http.service';
 import { HomeRoutingModule } from './home-routing.module';
-import { FriendsComponent } from './pages/friends/friends.component';
+import { FriendsComponent } from './components/friends/friends.component';
 import { HomeComponent } from './pages/home/home.component';
-import { NavigationComponent } from './pages/navigation/navigation.component';
-import { PostsComponent } from './pages/posts/posts.component';
-import { HomeGuard } from 'src/app/core/authentication/guards/home.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { PostsComponent } from './components/posts/posts.component';
+import { PostPhotoComponent } from './components/post-photo/post-photo.component';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     FriendsComponent,
     PostsComponent,
-    NavigationComponent
+    NavigationComponent,
+    PostPhotoComponent
     
   ],
   imports: [
@@ -25,6 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
     HomeRoutingModule,
     HttpClientModule
   ],
-  providers:[AuthenticationHttpService,HomeGuard]
+  providers:[AuthenticationHttpService]
 })
 export class HomeModule { }

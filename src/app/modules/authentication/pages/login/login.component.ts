@@ -12,8 +12,8 @@ import { ResponseService } from 'src/app/shared/services/response.service';
 export class LoginComponent {
   public createAccount:boolean=false;
   public loginForm:FormGroup = new FormGroup({
-                                                  email :new FormControl ('',[Validators.required,Validators.email]),
-                                                  password: new FormControl('',Validators.required)
+                                                  email :new FormControl ('john@gmail.com',[Validators.required,Validators.email]),
+                                                  password: new FormControl('asdf',Validators.required)
                                               })
 
   constructor(private readonly router:Router, private readonly response:ResponseService,private readonly loginHttp:LoginHttpService){}

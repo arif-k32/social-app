@@ -12,6 +12,10 @@ const routes: Routes = [
                             loadChildren:()=>import('./modules/home/home.module').then((m)=>m.HomeModule)
                           },
                           {
+                            path:'profile',
+                            loadChildren:()=>import('./modules/profile/profile.module').then((m)=>m.ProfileModule)
+                          },
+                          {
                             path:'login',
                             loadChildren:()=>import('./modules/authentication/authentication.module').then((m)=>m.AuthenticationModule)
                           }

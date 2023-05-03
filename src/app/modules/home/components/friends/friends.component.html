@@ -1,0 +1,38 @@
+<div class="p-3">
+    <div class="p-2 flex items-center justify-between">
+        <div class="flex items-center">
+            <img class="mr-2 w-14 h-14 overflow-hidden object-cover rounded-full" src="https://cdn.xxl.thumbs.canstockphoto.com/head-shot-business-man-in-suit-grey-head-shot-portrait-of-handsome-middle-age-business-man-in-suit-picture_csp9626211.jpg" alt="my-profile-pic">
+            <h2 class="font-bold text-xl">{{name}}</h2>
+        </div>
+        <a routerLink="./../profile">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-blue-500 w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+        </a>
+        
+          
+        
+    </div>
+    
+
+    <hr class='my-2'>
+
+    <div class="flex items-center justify-between p-2">
+        <h2 class="font-bold text-xl">Friends</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+    </div>
+
+    <div class="mt-2">
+        <div *ngFor="let item of dat" class="p-2 flex items-center justify-between">
+            <div class="flex items-center">
+                <img class="mr-2 w-9 h-9 overflow-hidden object-cover rounded-full" [src]="item.profile_pic" alt="my-profile-pic">
+                <h2 class="font-medium">{{item.name}}</h2>
+            </div>
+            <svg class="w-2 h-2 " [ngClass]="{'fill-green-500':item.active}"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"   stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
+        </div>
+    </div>
+
+
+</div>
