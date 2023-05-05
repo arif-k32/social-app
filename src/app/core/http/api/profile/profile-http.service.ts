@@ -21,4 +21,8 @@ export class ProfileHttpService {
   public updateProfile(details:any):Observable<any>{
     return this.httpClient.post(`${environment.api}/profile/`,details);
   }
+
+  public createNewPost(file:FormData):Observable<any>{
+    return this.httpClient.post(`${environment.api}/posts/`,file);
+  }
 }

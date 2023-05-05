@@ -1,7 +1,10 @@
 <div class=" bg-gray-100 h-full p-6 overflow-scroll">
 
     <div class="bg-white rounded-2xl p-5">
-        <h2 class="font-bold">What's on your mind ? {{name}}</h2>
+        <h2 class="font-bold">
+          <span>What's on your mind ?</span>
+          <span *ngIf="curr_user" class="ml-1">{{curr_user?.first_name+' '+curr_user?.last_name}}</span>
+        </h2>
         <div class="flex justify-between p-2">
           <p class="mt-1">Sharing options</p>
           <svg (click)="togglePostPhoto()" class="cursor-pointer w-6 h-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
@@ -46,6 +49,6 @@
 
     </div>
     <div *ngIf="postPhoto" class="fixed z-10 w-screen h-screen top-0 bottom-0 right-0 left-0">
-        <app-post-photo (close)="togglePostPhoto()"></app-post-photo>
+        <upload-photo-model [uploadFor]="'post'" (upload)="createNewPost($event)" (close)="togglePostPhoto()"></upload-photo-model>
     </div>
 </div>

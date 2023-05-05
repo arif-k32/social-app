@@ -6,22 +6,33 @@ import { DataSupplyService } from '../../../../shared/services/data-supply.servi
   selector: 'app-posts',
   templateUrl: './posts.component.html',
 })
-export class PostsComponent implements OnInit {
-  name='John';
+export class PostsComponent {
+
+
+  public curr_username!:string;
+  public curr_user!:any;
   public postPhoto=false;
-  constructor(private readonly data:DataSupplyService, private readonly profileHttp:ProfileHttpService){this.dat=data.users}
+
+
+  constructor(private readonly data:DataSupplyService, private readonly profileHttp:ProfileHttpService){
+        this.curr_username=data.curr_username;
+        this.dat=data.users;
+        profileHttp.getProfile(this.curr_username).subscribe((response)=>{
+                                                      this.curr_user=response;
+                                                })
+  }
   dat!:any;
 
   public togglePostPhoto():void{
     this.postPhoto=!this.postPhoto;
   }
 
-  ngOnInit(){
-    this.profileHttp.getProfile('arifk').subscribe((respone)=>{
-      console.log(respone)
-
-    })
-    // this.profileHttp.updateProfile({first_name:'arif',last_name:"k",username:"arifk",about:"Hello World"}).subscribe((response)=>{console.log(response)})
+  public createNewPost(fileToUpload:FormData):void{
+      this.profileHttp.createNewPost(fileToUpload).subscribe((response)=>{
+                                                            this.togglePostPhoto();
+                                                        })
   }
+
+  
   
 }

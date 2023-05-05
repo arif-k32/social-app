@@ -1,17 +1,20 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PostsHttpService } from 'src/app/core/http/api/home/posts-http.service';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 
 @Component({
-  selector: 'app-post-photo',
-  templateUrl: './post-photo.component.html',
+  selector: 'upload-photo-model',
+  templateUrl: './upload-photo-model.component.html',
 })
 
-export class PostPhotoComponent {
+export class UploadPhotoModelComponent {
 
   @Output() close:EventEmitter<null> = new EventEmitter<null>();
+  @Output() upload:EventEmitter<FormData> = new EventEmitter<FormData>();
+  @Input() uploadFor!:string;   /// profile pic || post
   @ViewChild('newPostImage') newPostView!:ElementRef;
+
 
   public newPostImage=false;
   public imageToPost!:File;
@@ -76,15 +79,17 @@ export class PostPhotoComponent {
     fileReader.readAsDataURL(this.imageToPost)
   }
 
-  public sharePost():void{
+  public uploadFile():void{
     const fileToUpload:FormData= new FormData();
     const caption = this.captionForm.controls['caption'].value;
-    // fileToUpload.append('caption',caption)
+    if(this.uploadFor == 'post')
+        fileToUpload.append('content',caption)
     fileToUpload.append('file',this.imageToPost,this.imageToPost.name);
-    // this.postsHttp.postPhoto(fileToUpload).subscribe((response:any)=>{console.log(response);this.close.emit();})
-    this.profileHttp.setProfilePicture(fileToUpload).subscribe((response)=>{console.log(response)})
+    this.upload.emit(fileToUpload);
     
   }
+
+  
 
 
 

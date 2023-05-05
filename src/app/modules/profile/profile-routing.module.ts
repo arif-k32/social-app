@@ -4,6 +4,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AboutComponent } from './components/about/about.component';
 import { FriendsComponent } from './components/friends/friends.component';
 import { PhotosComponent } from './components/photos/photos.component';
+import { EditInfoComponent } from './components/edit-info/edit-info.component';
 
 const routes: Routes = [
                           {
@@ -27,6 +28,10 @@ const routes: Routes = [
                                           path:'about' ,
                                           component:AboutComponent
                                         },
+                                        {
+                                          path:'edit-info',
+                                          component:EditInfoComponent
+                                        }
                                       ]
                           }
                         ];

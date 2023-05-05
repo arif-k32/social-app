@@ -6,6 +6,9 @@ import { Injectable } from '@angular/core';
 export class DataSupplyService {
 
   constructor() { }
+
+  curr_username ='arifk'
+
   users:any[] = [
     {
       name: 'Emily',
