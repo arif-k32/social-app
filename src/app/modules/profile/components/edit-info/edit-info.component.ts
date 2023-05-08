@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
+import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
+import { NotifyService } from 'src/app/shared/services/notify.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-info',
@@ -23,14 +26,15 @@ export class EditInfoComponent {
   
   
 
-  test='arifk';
+  curr_user!:ICurr_user;
 
 
-  constructor(private readonly profileHttp:ProfileHttpService){
-    profileHttp.getProfile(this.test).subscribe((response)=>{
-                                           
-                                                this.updateProfileForm.patchValue(response);
-                                        })
+  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService){
+    profileHttp.getCurrentUser().subscribe((currUser:ICurr_user)=>{
+                                        this.curr_user=currUser;
+                                        this.updateProfileForm.patchValue(currUser)
+                                  })
+    
   }
 
 
@@ -42,8 +46,14 @@ export class EditInfoComponent {
 
   public saveEdits(property:string):void{
     this.profileHttp.updateProfile(this.updateProfileForm.value).subscribe((response)=>{  
-                                                                              if(response == 'Updated')
-                                                                                  this.toggleEdit(property);
+                                                                              if(response == 'Updated'){
+                                                                                this.toggleEdit(property);
+                                                                                const updated_user= this.updateProfileForm.value;
+                                                                                updated_user.picture=environment.api+'/pictures/'+this.curr_user.picture;
+                                                                                this.notify.notifyParent(updated_user);
+
+                                                                              }
+                                                                                  
                                                                   })
     
   }

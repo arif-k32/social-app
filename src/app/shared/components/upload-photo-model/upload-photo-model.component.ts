@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { PostsHttpService } from 'src/app/core/http/api/home/posts-http.service';
+import { PostsHttpService } from 'src/app/core/http/api/posts/posts-http.service';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 
 @Component({

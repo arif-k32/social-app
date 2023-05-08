@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { EditInfoComponent } from './components/edit-info/edit-info.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SettingsComponent,
     SuggestionsComponent,
     EditInfoComponent,
+    TimelineComponent,
    
 
   ],

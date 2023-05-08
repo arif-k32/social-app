@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
-import { DataSupplyService } from 'src/app/shared/services/data-supply.service';
+import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
+import { NotifyService } from 'src/app/shared/services/notify.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,15 +14,18 @@ export class ProfileComponent  {
 
   uploadProfile =false;
 
-  test='arifk';
 
 
-  constructor(private readonly data:DataSupplyService,private readonly profileHttp:ProfileHttpService){ 
-      this.getProfile(this.test);
+  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService){ 
+    this.getProfile();
   }
 
-  public getProfile(username:string):void{
-    this.profileHttp.getProfile(username).subscribe((response)=>{ 
+  public notification:Subscription = this.notify.notificationToParent().subscribe((currUser:ICurr_user)=>{ 
+          this.getProfile();
+    });
+
+  public getProfile():void{
+    this.profileHttp.getCurrentUser().subscribe((response)=>{ 
                                               this.curr_user=response;
                                               this.curr_user.picture=environment.api+'/pictures/'+response.picture;
                                             })
@@ -33,7 +38,7 @@ export class ProfileComponent  {
   public uploadProfilePic(fileToUpload:FormData):void{
     this.profileHttp.setProfilePicture(fileToUpload).subscribe((response)=>{
                                                                   this.toggleUploadProfile();
-                                                                  this.getProfile(this.test)
+                                                                 this.getProfile();
                                                         })
   }
 

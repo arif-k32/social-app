@@ -5,16 +5,23 @@ import { AboutComponent } from './components/about/about.component';
 import { FriendsComponent } from './components/friends/friends.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { EditInfoComponent } from './components/edit-info/edit-info.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
+import { HomeGuard } from 'src/app/core/authentication/guards/home.guard';
 
 const routes: Routes = [
                           {
                             path:'',
                             component:ProfileComponent,
+                            canActivate:[HomeGuard],
                             children:[
                                         {
                                           path:'',
-                                          redirectTo:'photos',
+                                          redirectTo:'timeline',
                                           pathMatch:'full'
+                                        },
+                                        {
+                                          path:'timeline',
+                                          component:TimelineComponent
                                         },
                                         {
                                           path:'photos',

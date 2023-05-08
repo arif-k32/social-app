@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,7 +23,10 @@ export class ProfileHttpService {
     return this.httpClient.post(`${environment.api}/profile/`,details);
   }
 
-  public createNewPost(file:FormData):Observable<any>{
-    return this.httpClient.post(`${environment.api}/posts/`,file);
+  
+  public getCurrentUser():Observable<ICurr_user>{
+    return this.httpClient.get<ICurr_user>(`${environment.api}/profile/`);
   }
+  
 }
+

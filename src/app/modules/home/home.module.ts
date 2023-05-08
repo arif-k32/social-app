@@ -6,11 +6,13 @@ import { FriendsComponent } from './components/friends/friends.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { PostsHttpService } from 'src/app/core/http/api/home/posts-http.service';
+import { PostsHttpService } from 'src/app/core/http/api/posts/posts-http.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PostsComponent } from './components/posts/posts.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { HomeComponent } from './pages/home/home.component';
     FriendsComponent,
     PostsComponent,
     NavigationComponent,
+    NotificationsComponent,
   
    
     
@@ -31,6 +34,6 @@ import { HomeComponent } from './pages/home/home.component';
     SharedModule
 
   ],
-  providers:[AuthenticationHttpService, PostsHttpService]
+  providers:[AuthenticationHttpService, PostsHttpService, ProfileHttpService]
 })
 export class HomeModule { }
