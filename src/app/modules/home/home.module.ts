@@ -13,6 +13,10 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ExploreComponent } from './components/explore/explore.component';
+import { FriendsHttpService } from 'src/app/core/http/api/friends/friends-http.service';
+import { AddNewFriendsComponent } from './components/add-new-friends/add-new-friends.component';
+import { CommentsHttpService } from 'src/app/core/http/api/comments/comments-http.service';
 
 
 @NgModule({
@@ -23,6 +27,8 @@ import { NotificationsComponent } from './components/notifications/notifications
     PostsComponent,
     NavigationComponent,
     NotificationsComponent,
+    ExploreComponent,
+    AddNewFriendsComponent,
   
    
     
@@ -34,6 +40,6 @@ import { NotificationsComponent } from './components/notifications/notifications
     SharedModule
 
   ],
-  providers:[AuthenticationHttpService, PostsHttpService, ProfileHttpService]
+  providers:[AuthenticationHttpService, PostsHttpService, ProfileHttpService, FriendsHttpService, CommentsHttpService]
 })
 export class HomeModule { }

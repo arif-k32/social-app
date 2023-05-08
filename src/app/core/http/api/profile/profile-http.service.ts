@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
 import { environment } from 'src/environments/environment';
 
@@ -27,6 +27,13 @@ export class ProfileHttpService {
   public getCurrentUser():Observable<ICurr_user>{
     return this.httpClient.get<ICurr_user>(`${environment.api}/profile/`);
   }
+
+  
+
+ 
   
 }
+
+
+
 

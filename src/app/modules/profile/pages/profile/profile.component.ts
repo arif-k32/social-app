@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
@@ -9,14 +10,14 @@ import { environment } from 'src/environments/environment';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
-export class ProfileComponent  {
+export class ProfileComponent implements OnInit  {
   curr_user!:any;
 
   uploadProfile =false;
 
 
 
-  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService){ 
+  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService, private readonly activatedRoute:ActivatedRoute ){ 
     this.getProfile();
   }
 
@@ -40,6 +41,12 @@ export class ProfileComponent  {
                                                                   this.toggleUploadProfile();
                                                                  this.getProfile();
                                                         })
+  }
+
+  ngOnInit(): void {
+     this.activatedRoute.queryParams.subscribe((params:{[username:string]:string})=>{
+          console.log(params);
+     })
   }
 
   

@@ -15,9 +15,9 @@ export class PhotosComponent {
 
         profileHttp.getCurrentUser().subscribe((currUser:ICurr_user)=>{
                     postsHttp.getPostsByUserName(currUser.username).subscribe((posts:IPosts[])=>{
-                                            posts.sort((a:IPosts, b:IPosts)=> new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+                                            posts.sort((a:IPosts, b:IPosts)=> new Date(b.post.created_at).getTime() - new Date(a.post.created_at).getTime())
                                             for(let post of posts)
-                                                post.picture=environment.api+"/pictures/"+post.picture;
+                                                post.post.picture=environment.api+"/pictures/"+post.post.picture;
                                             this.posts=posts;   
                     })
         })

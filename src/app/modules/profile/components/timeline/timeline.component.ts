@@ -16,18 +16,17 @@ export class TimelineComponent {
 
 
       profileHttp.getCurrentUser().subscribe((currUser:ICurr_user)=>{
-                                              postsHttp.getPostsByUserName(currUser.username).subscribe((posts:any)=>{
-                                                                posts.sort((a: IPosts, b: IPosts) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
-                                                                
+                                              postsHttp.getPostsByUserName(currUser.username).subscribe((posts:IPosts[])=>{
+                                                                posts.sort((a: IPosts, b: IPosts) => {   return new Date(b.post.created_at).getTime() - new Date(a.post.created_at).getTime();   });
+
                                                                 for(let post of posts){
                                                                     post.first_name=currUser.first_name;
                                                                     post.last_name=currUser.last_name;
-                                                                    post.picture=environment.api+'/pictures/'+post.picture;
+                                                                    post.post.picture=environment.api+'/pictures/'+post.post.picture;
                                                                     post.profile_pic =environment.api+'/pictures/'+currUser.picture;
                                                                 }
                                                                 
                                                                 this.posts=posts;
-                                                               
                                               })
       })
 

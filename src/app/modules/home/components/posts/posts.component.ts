@@ -4,12 +4,13 @@ import { PostsHttpService } from 'src/app/core/http/api/posts/posts-http.service
 import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
 import { environment } from 'src/environments/environment';
 import { IPosts } from 'src/app/shared/interfaces/current-user/posts.interface';
+import { FriendsHttpService } from 'src/app/core/http/api/friends/friends-http.service';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
 })
-export class PostsComponent {
+export class PostsComponent implements OnInit {
 
 
  
@@ -18,22 +19,10 @@ export class PostsComponent {
   public postPhoto=false;
 
 
-  constructor( private readonly profileHttp:ProfileHttpService, private readonly postsHttp:PostsHttpService){
+  constructor( private readonly friendsHttp:FriendsHttpService, private readonly postsHttp:PostsHttpService, private readonly proflieHttp:ProfileHttpService){
+   
         
-            profileHttp.getCurrentUser().subscribe((currUser:ICurr_user)=>{
-                                                this.curr_user=currUser;
-                                                postsHttp.getPostsByUserName(currUser.username).subscribe((posts:any)=>{
-                                                                  posts.sort((a: IPosts, b: IPosts) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
-                                                                  for(let post of posts){
-                                                                      post.first_name=currUser.first_name;
-                                                                      post.last_name=currUser.last_name;
-                                                                      post.picture=environment.api+'/pictures/'+post.picture;
-                                                                      post.profile_pic =environment.api+'/pictures/'+currUser.picture;
-                                                                  }
-                                                                  this.posts=posts;
-
-                                                              })
-                                              })
+            
   }
 
 
@@ -49,6 +38,31 @@ export class PostsComponent {
       
   }
 
+
+  ngOnInit(): void {
+            this.proflieHttp.getCurrentUser().subscribe((currUser:any)=>{
+                      currUser.picture=environment.api+'/pictures/'+currUser.picture;
+                      this.friendsHttp.getCurrentFriends().subscribe((friendList)=>{
+                                  friendList=friendList.filter((obj:any, index:any, self:any) => index === self.findIndex((o:any) => o.username === obj.username));
+                                  let allPosts:any[]=[]
+                                  for(let friend of friendList){
+                                      this.postsHttp.getPostsByUserName(friend.username).subscribe((response:any)=>{
+                                                                                  for(let post of response){
+                                                                                      post.first_name=friend.first_name;
+                                                                                      post.last_name=friend.last_name;
+                                                                                      post.post.picture=environment.api+'/pictures/'+post.post.picture;
+                                                                                      post.profile_pic=environment.api+'/pictures/'+friend.picture;
+                                                                                      post.curr_user=currUser;
+                                                                                    }
+                                                                                    allPosts= allPosts.concat(response)
+                                                                                    allPosts.sort((a: IPosts, b: IPosts) => {   return new Date(b.post.created_at).getTime() - new Date(a.post.created_at).getTime();   });
+                                                                                    this.posts=allPosts;
+
+                                                                                  })
+                                                                  }
+                                                            })
+                                        })
+  }
   
   
 }
