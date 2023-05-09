@@ -10,7 +10,7 @@ import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.s
 export class PostCardComponent implements OnInit {
 
   @Input() post!:any;
-  commentSection=false;
+  commentSection=true;
  
 
 
@@ -58,6 +58,17 @@ export class PostCardComponent implements OnInit {
 
 
   ngOnInit(): void {
+    for(let k of [1,2,3,4])
+        for (let i of [1,2,3,4,5,6,7,8]){
+          const comment = {
+                              comment:`test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj`,
+                              first_name:'name',
+                              last_name:'name',
+                              profile_pic:'https://www.dpforwhatsapp.in/img/dpfotwhatsapp/12.webp'
+                          }
+          this.post.post.comments.push(comment);
+        }
+
   }
 
 

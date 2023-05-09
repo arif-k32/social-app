@@ -31,14 +31,36 @@
         </button>
       </div>
 
-      <div *ngIf="commentSection" class="w-full h-3/4 absolute bottom-0 bg-white rounded-md ">
+      <div *ngIf="commentSection" class="w-full h-3/4 absolute bottom-0 bg-white rounded-md shadow-inner ">
         <div (click)="toggleCommentSection()" class="cursor-pointer hover:text-red-500 absolute top-2 right-2">X</div>
+
+        <div class="w-full h-full p-3 flex flex-col justify-start space-y-3 overflow-y-scroll">
+
+
+          <div *ngFor="let comment of post.post.comments" class="bg-gray-200 w-full flex space-x-2 p-1 rounded-md  items-center" >
+            <div class=" w-10 h-10 shrink-0"> 
+              <img class="h-full w-full border-2 border-black object-cover rounded-full overflow-hidden" [src]="comment.profile_pic" >
+            </div>
+            
+            <div class="flex flex-col overflow-hidden" >
+                <div class="flex items-center space-x-2">
+                    <p class="font-medium">{{comment.first_name+' '+comment.last_name}}</p>
+                    <p class="text-sm">2 days ago.</p>
+                </div>
+                <div >
+                  <p class="">{{comment.comment}}</p>
+                </div>
+            </div>
+
+          </div>
+
+        </div>
 
         <div class=" absolute bottom-0 bg-gray-500 flex items-center p-1 w-full rounded-md">
             <img class="h-10 w-10 object-cover rounded-full overflow-hidden m-1" [src]="post.curr_user.picture" >
-            <div class=" w-full relative">
+            <div class=" w-full relative flex items-center">
               <input #commentInput class="w-full border px-1 py-2 rounded-md" type="text" placeholder="Comment on {{post.first_name+' '+post.last_name}}'s photo ......">
-              <svg (click)="commentOnPost(commentInput.value, post.post.id);commentInput.value=''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bg-white w-6 h-6 absolute top-2 hover:text-blue-500 cursor-pointer right-1 text-black">
+              <svg (click)="commentOnPost(commentInput.value, post.post.id);commentInput.value=''" class="bg-white w-6 h-6 absolute  hover:text-blue-500 cursor-pointer right-1 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
               </svg>
               
