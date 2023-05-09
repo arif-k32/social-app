@@ -15,11 +15,15 @@
 
     <h1 class="my-6 pl-2 font-bold text-xl">Posts</h1>
 
+    
+
     <div *ngFor="let post of posts">
 
       <app-post-card [post]="post"></app-post-card>
         
   </div>
+
+
     <div *ngIf="postPhoto" class="fixed z-10 w-screen h-screen top-0 bottom-0 right-0 left-0">
         <upload-photo-model [uploadFor]="'post'" (upload)="createNewPost($event)" (close)="togglePostPhoto()"></upload-photo-model>
     </div>
