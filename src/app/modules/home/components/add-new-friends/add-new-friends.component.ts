@@ -15,41 +15,48 @@ export class AddNewFriendsComponent implements OnInit {
   friendRequests!:any;
 
 
+
   constructor(private readonly friendsHttp:FriendsHttpService, private readonly profileHttp:ProfileHttpService, private readonly router:Router){}
 
 
   public loadAvailableUsers():void{
     this.friendsHttp.getAvailableUsers().subscribe((response:any)=>{
-                                                for(let user of response){
-                                                  this.profileHttp.getProfile(user.username).subscribe((resonse)=>{  user.profile_pic=environment.api+"/pictures/"+resonse.picture  })
-                                                }
+                                                // for(let user of response){
+                                                //   this.profileHttp.getProfile(user.username).subscribe((resonse)=>{  user.profile_pic=environment.api+"/pictures/"+resonse.picture  })
+                                                // }
                                                 response=response.filter((user:any)=> user.friendship == false)
                                                 this.availableUsers=response;
                                           })
   }
   public loadFriendRequests():void{
-    this.friendsHttp.friendRequests().subscribe((response:any)=>{
-                                              console.log(response)
+    this.friendsHttp.friendRequests().subscribe((requests:any)=>{
+                                              // for (const request of requests) {
+                                              //     request.sender.picture=environment.api+'/pictures/'+request.sender.picture;
+                                              // }
+                                              requests=requests.filter((request:any)=>request.status == 'pending')
+                                              this.friendRequests=requests;
                                         })
   }
 
 
   public sendFriendRequest(username:string):void{
-    this.friendsHttp.sendFriendRequest(username).subscribe((Response)=>console.log(Response))
+    this.friendsHttp.sendFriendRequest(username).subscribe((response)=>this.loadAvailableUsers())
+  }
+
+  public acceptFriendRequest(username:any):void{
+      this.friendsHttp.acceptFriendRequest(username).subscribe((r)=>console.log(this.loadFriendRequests()))
   }
 
   public reRouteToProfile(username:string):void{
-      this.router.navigate(['profile'],{queryParams:{user:username}});
+      this.router.navigate(['profile'],{queryParams:{username:username}});
   }
+
+  
 
 
   ngOnInit(): void {
        this.loadAvailableUsers();
-      //  this.friendsHttp.friendRequests().subscribe((Response)=>{
-      //   console.log(Response)
-      //  })
-      // //  this.friendsHttp.acceptFriendRequest('amal').subscribe((re)=>{console.log(re)})
-      //  this.friendsHttp.getCurrentFriends().subscribe((response)=>{ console.log(response) })
+       this.loadFriendRequests();
 
   }
 

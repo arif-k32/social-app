@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommentsHttpService } from 'src/app/core/http/api/comments/comments-http.service';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-card',
@@ -10,14 +13,21 @@ import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.s
 export class PostCardComponent implements OnInit {
 
   @Input() post!:any;
-  commentSection=true;
+  public commentSection=false;
+  public commentForm :FormGroup = new FormGroup({
+                                                    post_id:new FormControl('',Validators.required),
+                                                    content:new FormControl('',Validators.required)
+                                                  });
  
 
 
-  constructor(private readonly commentsHttp:CommentsHttpService){}
+  constructor(private readonly commentsHttp:CommentsHttpService, private readonly router:Router){}
 
   public toggleCommentSection():void{
      this.commentSection=!this.commentSection;
+  }
+  public reRouteToProfile(username:string):void{
+    this.router.navigate(['profile'],{queryParams:{username:username}});
   }
 
 
@@ -51,23 +61,32 @@ export class PostCardComponent implements OnInit {
   }
 
 
-  public commentOnPost(comment:string, post_id:string):void{
-      this.commentsHttp.commentOnPost(comment,post_id).subscribe((Response)=>console.log(Response));
+  public commentOnPost():void{
+    if(this.commentForm.valid)
+        this.commentsHttp.commentOnPost(this.commentForm.value).subscribe((response)=>{
+                                                                        this.commentForm.reset();
+                                                                        const { first_name, last_name, username, content, picture, created_at } = response.comment.author;
+                                                                        let comment = { first_name, last_name, username, content, picture, created_at };
+                                                                        comment.content=response.comment.content;
+                                                                        comment.created_at=response.comment.created_at;
+                                                                        // comment.picture=environment.api+'/pictures/'+comment.picture
+                                                                        this.post.post.comments.push(comment);
+                                                                        this.post.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
+                                                                        this.post.comments.push(comment);
+                                                                        this.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
+                                                                });
   }
 
 
 
   ngOnInit(): void {
-    for(let k of [1,2,3,4])
-        for (let i of [1,2,3,4,5,6,7,8]){
-          const comment = {
-                              comment:`test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj test ${i} comment laksdj fkjewij a;kenrwoieh rwemr; alkejf ioe jra;kj jra; kwejrm aw,enr awiuehuiawhf awjenalenf aknfeawoiueht a;wenta;wktn;a wrktja;iwojt a;weal;ekj`,
-                              first_name:'name',
-                              last_name:'name',
-                              profile_pic:'https://www.dpforwhatsapp.in/img/dpfotwhatsapp/12.webp'
-                          }
-          this.post.post.comments.push(comment);
-        }
+    // for(let comment of this.post.comments)
+    //       comment.picture = environment.api+'/pictures/'+comment.picture;
+    this.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
+    this.post.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
+    this.commentForm.controls['post_id'].setValue(this.post.post.id);
+
+    
 
   }
 

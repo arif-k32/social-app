@@ -11,42 +11,61 @@ import { environment } from 'src/environments/environment';
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit  {
-  curr_user!:any;
-
-  uploadProfile =false;
 
 
+  public user_profile!:any;
+  public uploadButton=false;
+  public uploadProfile=false;
 
-  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService, private readonly activatedRoute:ActivatedRoute ){ 
-    this.getProfile();
-  }
+
+
+  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService, private readonly activatedRoute:ActivatedRoute ){  }
 
   public notification:Subscription = this.notify.notificationToParent().subscribe((currUser:ICurr_user)=>{ 
-          this.getProfile();
+          this.getCurrUser();
     });
 
-  public getProfile():void{
+  public getCurrUser():void{
     this.profileHttp.getCurrentUser().subscribe((response)=>{ 
-                                              this.curr_user=response;
-                                              this.curr_user.picture=environment.api+'/pictures/'+response.picture;
+                                              // response.picture=environment.api+'/pictures/'+response.picture;
+                                              this.user_profile=response;
+                                              this.toggleUploadButton();
                                             })
+  }
+  public getProfile(username:string):void{
+    this.profileHttp.getProfile(username).subscribe((profile)=> {
+                                                // profile.picture=environment.api+'/pictures/'+profile.picture;
+                                                this.user_profile=profile ;
+
+                                          });
   }
 
   public toggleUploadProfile():void{
       this.uploadProfile=!this.uploadProfile;
   }
+  public toggleUploadButton():void{
+     this.uploadButton=!this.uploadButton;
+  }
 
   public uploadProfilePic(fileToUpload:FormData):void{
     this.profileHttp.setProfilePicture(fileToUpload).subscribe((response)=>{
-                                                                  this.toggleUploadProfile();
-                                                                 this.getProfile();
+                                                                this.toggleUploadProfile();
+                                                                this.getCurrUser();
                                                         })
   }
 
   ngOnInit(): void {
-     this.activatedRoute.queryParams.subscribe((params:{[username:string]:string})=>{
-          console.log(params);
-     })
+    this.activatedRoute.queryParams.subscribe((params:{[username:string]:string})=>{
+            this.profileHttp.getCurrentUser().subscribe((currUser)=>{
+                                                    if(params['username'] && (params['username'] != currUser.username)){
+                                                        this.getProfile(params['username']);
+                                                    }
+                                                    else{
+                                                      this.getCurrUser();
+                                                    }
+                                              })
+                                            
+                                      })
   }
 
   

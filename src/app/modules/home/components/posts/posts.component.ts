@@ -5,6 +5,7 @@ import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.
 import { environment } from 'src/environments/environment';
 import { IPosts } from 'src/app/shared/interfaces/current-user/posts.interface';
 import { FriendsHttpService } from 'src/app/core/http/api/friends/friends-http.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
@@ -39,29 +40,55 @@ export class PostsComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-            this.proflieHttp.getCurrentUser().subscribe((currUser:any)=>{
-                      currUser.picture=environment.api+'/pictures/'+currUser.picture;
-                      this.friendsHttp.getCurrentFriends().subscribe((friendList)=>{
-                                  friendList=friendList.filter((obj:any, index:any, self:any) => index === self.findIndex((o:any) => o.username === obj.username));
-                                  let allPosts:any[]=[]
-                                  for(let friend of friendList){
-                                      this.postsHttp.getPostsByUserName(friend.username).subscribe((response:any)=>{
-                                                                                  for(let post of response){
-                                                                                      post.first_name=friend.first_name;
-                                                                                      post.last_name=friend.last_name;
-                                                                                      post.post.picture=environment.api+'/pictures/'+post.post.picture;
-                                                                                      post.profile_pic=environment.api+'/pictures/'+friend.picture;
-                                                                                      post.curr_user=currUser;
-                                                                                    }
-                                                                                    allPosts= allPosts.concat(response)
-                                                                                    allPosts.sort((a: IPosts, b: IPosts) => {   return new Date(b.post.created_at).getTime() - new Date(a.post.created_at).getTime();   });
-                                                                                    this.posts=allPosts;
 
-                                                                                  })
-                                                                  }
-                                                            })
-                                        })
+  public getAllPosts(currUser:any, friendList:any):void{
+    let allPosts:any[]=[]
+    for(let friend of friendList){
+        this.postsHttp.getPostsByUserName(friend.username).subscribe((posts:any)=>{
+                                                    for(let post of posts){
+                                                        post.first_name=friend.first_name;
+                                                        post.last_name=friend.last_name;
+                                                        post.username=friend.username;
+                                                        // post.post.picture=environment.api+'/pictures/'+post.post.picture;
+                                                        post.profile_pic=friend.picture;
+                                                        post.curr_user=currUser;
+                                                      }
+                                                      allPosts= allPosts.concat(posts)
+                                                      allPosts.sort((a: IPosts, b: IPosts) => {   return new Date(b.post.created_at).getTime() - new Date(a.post.created_at).getTime();   });
+                                                      this.posts=allPosts;
+
+                                                    })
+                                    }
+
+  }
+
+
+
+  public getCurrentFriends(currUser:any):void{
+
+    this.friendsHttp.getCurrentFriends().subscribe((friendList)=>{
+                                              friendList=friendList.filter((obj:any, index:any, self:any) => index === self.findIndex((o:any) => o.username === obj.username));
+                                              this.getAllPosts(currUser, friendList)      
+                                          })
+
+  }
+
+  public getAllFriendsPosts():void{
+    this.proflieHttp.getCurrentUser().subscribe((currUser:any)=>{
+                                            // currUser.picture=environment.api+'/pictures/'+currUser.picture;
+                                            this.getCurrentFriends(currUser);
+                                       })
+    
+  }
+
+  
+
+
+
+  ngOnInit(): void {
+
+            this.getAllFriendsPosts();
+
   }
   
   

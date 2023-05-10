@@ -10,11 +10,7 @@ export class CommentsHttpService {
 
   constructor(private readonly httpClient:HttpClient) { }
 
-  public commentOnPost(comment:string, post_id:string):Observable<any>{
-    const body={
-                  post_id:post_id,
-                  comment:comment
-                }
+  public commentOnPost(body:{post_id:string, content:string}):Observable<any>{
     return this.httpClient.post(`${environment.api}/comments/`,body);
   }
 }

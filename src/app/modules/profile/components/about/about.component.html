@@ -4,7 +4,7 @@
         <div class="col-span-2 bg-gray-100 px-2 py-3 rounded-sm shadow-inner">
             <div class="flex font-medium px-3 justify-between items-center mb-1">
                 <h2>About</h2>
-                <div class="w-5 h-5 cursor-pointer">
+                <div *ngIf="editMode" class="w-5 h-5 cursor-pointer">
                     <svg *ngIf="!getEditStatus('about')"   (click)="toggleEdit('about')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" ><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
                     <svg *ngIf="getEditStatus('about')"   (click)="saveEdits('about')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                 </div>
@@ -25,7 +25,7 @@
             
             <p *ngIf="!getEditStatus('first_name')" class="mr-auto ml-1">{{getProfileDetails('first_name')}}</p>
             <input *ngIf="getEditStatus('first_name')" formControlName="first_name" class="bg-gray-50 border-b border-black mr-auto ml-1 rounded-sm"  >
-            <div class="w-5 h-5 cursor-pointer">
+            <div *ngIf="editMode" class="w-5 h-5 cursor-pointer">
                 <svg *ngIf="!getEditStatus('first_name')"   (click)="toggleEdit('first_name')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" ><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
                 <svg *ngIf="getEditStatus('first_name')"   (click)="saveEdits('first_name')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
             </div>
@@ -45,7 +45,7 @@
             </div>
             <p *ngIf="!getEditStatus('last_name')" class="mr-auto ml-1">{{getProfileDetails('last_name')}}</p>
             <input *ngIf="getEditStatus('last_name')" formControlName="last_name" class="bg-gray-50 border-b border-black mr-auto ml-1 rounded-sm"  >
-            <div class="w-5 h-5 cursor-pointer">
+            <div *ngIf="editMode" class="w-5 h-5 cursor-pointer">
                 <svg *ngIf="!getEditStatus('last_name')"   (click)="toggleEdit('last_name')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" ><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
                 <svg *ngIf="getEditStatus('last_name')"   (click)="saveEdits('last_name')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
             </div>
@@ -88,7 +88,7 @@
             
             <p *ngIf="!getEditStatus('username')" class="mr-auto ml-1">{{getProfileDetails('username')}}</p>
             <input *ngIf="getEditStatus('username')" formControlName="username" class="bg-gray-50 border-b border-black mr-auto ml-1 rounded-sm"  >
-            <div class="w-5 h-5 cursor-pointer">
+            <div *ngIf="editMode" class="w-5 h-5 cursor-pointer">
                 <svg *ngIf="!getEditStatus('username')"   (click)="toggleEdit('username')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" ><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg>
                 <svg *ngIf="getEditStatus('username')"   (click)="saveEdits('username')"  class="w-full h-full" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
             </div>

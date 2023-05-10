@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
 import { FriendsHttpService } from 'src/app/core/http/api/friends/friends-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-friends',
@@ -15,25 +16,27 @@ export class FriendsComponent implements OnInit {
   
   curr_user!:any;
   friends!:any;
-  constructor(private readonly profileHttp:ProfileHttpService, private readonly friendsHttp:FriendsHttpService){
-       
-  }
+  constructor(private readonly profileHttp:ProfileHttpService, private readonly friendsHttp:FriendsHttpService, private readonly router:Router){}
 
 
   public loadCurrentUser():void{
     this.profileHttp.getCurrentUser().subscribe((currUser)=>{ 
-                        currUser.picture=environment.api+'/pictures/'+currUser.picture;
+                        // currUser.picture=environment.api+'/pictures/'+currUser.picture;
                         this.curr_user=currUser;  
                     })
   }
   public loadFriends():void{
     this.friendsHttp.getCurrentFriends().subscribe((response:any)=> {
                                             for(let friend of response){
-                                              friend.profile_pic=environment.api+'/pictures/'+friend.picture;
+                                              // friend.profile_pic=environment.api+'/pictures/'+friend.picture;
                                               friend.active=true;
                                             }
                                             this.friends = response; 
                                           })
+  }
+
+  public reRouteToProfile(username:string):void{
+    this.router.navigate(['profile'],{queryParams:{username:username}});
   }
 
 

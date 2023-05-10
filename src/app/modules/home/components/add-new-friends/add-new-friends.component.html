@@ -12,7 +12,7 @@
             <div class="flex items-center ml-2">
                 <img class="rounded-full w-10 h-10 mr-2" [src]="user.profile_pic" >
                 <div class="flex flex-col items-start">
-                    <h3 class="font-medium">{{user.first_name+' '+user.last_name}}</h3>
+                    <h3 (click)="reRouteToProfile(user.username)"  class="font-medium hover:text-blue-500 cursor-pointer">{{user.first_name+' '+user.last_name}}</h3>
                     <p class="text-sm text-gray-500">New to Social app</p>
                 </div>
             </div>
@@ -29,15 +29,15 @@
             </svg> -->
         </div>
 
-        <div *ngFor="let user of availableUsers" class="my-4 flex justify-between items-center bg-white p-2 rounded-sm ">
+        <div *ngFor="let request of friendRequests" class="my-4 flex justify-between items-center bg-white p-2 rounded-sm ">
             <div class="flex items-center ml-2">
-                <img class="rounded-full w-10 h-10 mr-2" [src]="user.profile_pic" >
+                <img class="rounded-full w-10 h-10 mr-2" [src]="request.sender.picture" >
                 <div class="flex flex-col items-start">
-                    <h3 (click)="reRouteToProfile(user.username)" class="font-medium hover:text-blue-500 cursor-pointer">{{user.first_name+' '+user.last_name}}</h3>
+                    <h3 (click)="reRouteToProfile(request.sender.username)" class="font-medium hover:text-blue-500 cursor-pointer">{{request.sender.first_name+' '+request.sender.last_name}}</h3>
                     <p class="text-sm text-gray-500">New to Social app</p>
                 </div>
             </div>
-            <p (click)="sendFriendRequest(user.username)" class="text-blue-500 cursor-pointer hover:text-black">Accept</p>
+            <p (click)="acceptFriendRequest(request.sender.username)" class="text-blue-500 cursor-pointer hover:text-black">Accept</p>
     
         </div>
 

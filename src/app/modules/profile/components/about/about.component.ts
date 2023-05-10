@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
 import { NotifyService } from 'src/app/shared/services/notify.service';
@@ -9,62 +10,95 @@ import { environment } from 'src/environments/environment';
   selector: 'app-about',
   templateUrl: './about.component.html',
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
 
-  updateProfileForm:FormGroup= new FormGroup({
-    first_name:new FormControl('',Validators.required),
-    first_name_edit:new FormControl(false),
-    last_name: new FormControl('',Validators.required),
-    last_name_edit:new FormControl(false),
-    username:new FormControl("",Validators.required),
-    username_edit:new FormControl(false),
-    about:new FormControl('',Validators.required),
-    about_edit:new FormControl(false),
-    email:new FormControl(''),
-    birthday:new FormControl(''),
-  });
-
-
-
-curr_user!:ICurr_user;
-
-
-constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService){
-profileHttp.getCurrentUser().subscribe((currUser:ICurr_user)=>{
-this.curr_user=currUser;
-this.updateProfileForm.patchValue(currUser)
-})
-
-}
+      public updateProfileForm:FormGroup= new FormGroup({
+                                                          first_name:new FormControl('',Validators.required),
+                                                          first_name_edit:new FormControl(false),
+                                                          last_name: new FormControl('',Validators.required),
+                                                          last_name_edit:new FormControl(false),
+                                                          username:new FormControl("",Validators.required),
+                                                          username_edit:new FormControl(false),
+                                                          about:new FormControl('',Validators.required),
+                                                          about_edit:new FormControl(false),
+                                                          email:new FormControl(''),
+                                                          birthday:new FormControl(''),
+                                                        });
 
 
 
-public toggleEdit(property:string):void{
-const property_edit= property+'_edit';
-this.updateProfileForm.controls[property_edit].setValue(!this.updateProfileForm.controls[property_edit].value)
-}
+    public user_profile!:any;
+    public editMode=false;
 
-public saveEdits(property:string):void{
-this.profileHttp.updateProfile(this.updateProfileForm.value).subscribe((response)=>{  
-                                  if(response == 'Updated'){
-                                    this.toggleEdit(property);
-                                    const updated_user= this.updateProfileForm.value;
-                                    updated_user.picture=environment.api+'/pictures/'+this.curr_user.picture;
-                                    this.notify.notifyParent(updated_user);
 
-                                  }
-                                      
-                      })
+    constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService,private readonly activatedRoute:ActivatedRoute){}
 
-}
+    public toggleEditMode():void{
+      this.editMode=!this.editMode;
+    }
 
-public getEditStatus(property:string):boolean{
-const property_edit = property+'_edit';
-return this.updateProfileForm.controls[property_edit].value;
-}
-public getProfileDetails(property:string):string{
-return this.updateProfileForm.controls[property].value;
-}
+
+
+    public toggleEdit(property:string):void{
+       const property_edit= property+'_edit';
+        this.updateProfileForm.controls[property_edit].setValue(!this.updateProfileForm.controls[property_edit].value)
+    }
+
+    public saveEdits(property:string):void{
+          this.profileHttp.updateProfile(this.updateProfileForm.value).subscribe((response)=>{
+                                            console.log(response)  
+                                            // if(response == 'Updated'){
+                                              this.toggleEdit(property);
+                                              const updated_user= this.updateProfileForm.value;
+                                              updated_user.picture=environment.api+'/pictures/'+this.user_profile.picture;
+                                              this.notify.notifyParent(updated_user);
+
+                                            // }
+                                                
+                                })
+
+    }
+
+    public getEditStatus(property:string):boolean{
+        const property_edit = property+'_edit';
+        return this.updateProfileForm.controls[property_edit].value;
+    }
+    public getProfileDetails(property:string):string{
+          return this.updateProfileForm.controls[property].value;
+    }
+
+
+    public getCurrUser():void{
+      this.profileHttp.getCurrentUser().subscribe((response)=>{ 
+                                                // response.picture=environment.api+'/pictures/'+response.picture;
+                                                this.updateProfileForm.patchValue(response)
+                                                this.user_profile=response;
+                                                this.toggleEditMode();
+                                              })
+    }
+    public getProfile(username:string):void{
+      this.profileHttp.getProfile(username).subscribe((profile)=> {
+                                                  // profile.picture=environment.api+'/pictures/'+profile.picture;
+                                                  this.updateProfileForm.patchValue(profile)
+                                                  this.user_profile=profile ;
+  
+                                            });
+    }
+
+    ngOnInit(): void {
+      this.activatedRoute.queryParams.subscribe((params:{[username:string]:string})=>{
+              this.profileHttp.getCurrentUser().subscribe((currUser)=>{
+                                                      if(params['username'] && (params['username'] != currUser.username)){
+                                                          this.getProfile(params['username']);
+                                                      }
+                                                      else{
+                                                        this.getCurrUser();
+                                                      }
+                                                })
+                                              
+                                        })
+    }
+    
 
 
 }
