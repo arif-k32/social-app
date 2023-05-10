@@ -4,7 +4,6 @@ import { PostsHttpService } from 'src/app/core/http/api/posts/posts-http.service
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
 import { IPosts } from 'src/app/shared/interfaces/current-user/posts.interface';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-timeline',
@@ -19,13 +18,8 @@ export class TimelineComponent implements OnInit {
       this.profileHttp.getCurrentUser().subscribe((currUser:ICurr_user)=>{
               this.postsHttp.getPostsByUserName(user.username).subscribe((posts:any[])=>{
                           posts.sort((a: IPosts, b: IPosts) => {   return new Date(b.post.created_at).getTime() - new Date(a.post.created_at).getTime();   });
-                          // currUser.picture=environment.api+'/pictures/'+currUser.picture;
                           for(let post of posts){
-                            post.first_name=user.first_name;
-                            post.last_name=user.last_name;
-                            post.username=user.username;
-                            // post.post.picture=environment.api+'/pictures/'+post.post.picture;
-                            post.profile_pic=user.picture;
+                            post.author=user;
                             post.curr_user=currUser;
                           }
                           

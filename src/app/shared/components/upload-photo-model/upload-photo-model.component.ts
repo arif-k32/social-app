@@ -33,6 +33,9 @@ export class UploadPhotoModelComponent {
   public closeNewPost():void{
       this.close.emit();
   }
+  public stopClosePropagation(event:Event):void{
+      event.stopPropagation();
+  }
 
 
   public onDropFile(event:DragEvent):void{

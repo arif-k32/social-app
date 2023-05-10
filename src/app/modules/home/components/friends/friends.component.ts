@@ -27,11 +27,17 @@ export class FriendsComponent implements OnInit {
   }
   public loadFriends():void{
     this.friendsHttp.getCurrentFriends().subscribe((response:any)=> {
-                                            for(let friend of response){
+                                            let uniqueFriends:any[]=[];
+                                            for (let friend of response){
+                                              let  isFriendPresent:Boolean=uniqueFriends.some((uniqueFriend:any)=> uniqueFriend.username ==  friend.username);
+                                              if(!isFriendPresent)
+                                                  uniqueFriends.push(friend);
+                                            }
+                                            for(let friend of uniqueFriends){
                                               friend.profile_pic=friend.picture;
                                               friend.active=true;
                                             }
-                                            this.friends = response; 
+                                            this.friends = uniqueFriends; 
                                           })
   }
 

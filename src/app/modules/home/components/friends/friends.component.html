@@ -8,13 +8,13 @@
             </div>
             <div>
                 <ng-container *ngIf="curr_user">
-                    <h2 class="font-bold text-xl">{{ curr_user.first_name+' '+curr_user.last_name }}</h2>
+                    <h2 (click)="reRouteToProfile(curr_user.username)" class="font-bold text-xl hover:text-blue-500 cursor-pointer">{{ curr_user.first_name+' '+curr_user.last_name }}</h2>
                 </ng-container>
             </div>
             
             
         </div>
-        <a routerLink="./../profile">
+        <a routerLink="./../profile" [queryParams]="{username:curr_user?.username}" class="hover:bg-black/10 rounded-full overflow-hidden p-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-blue-500 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
@@ -27,9 +27,9 @@
 
     <div class="flex items-center justify-between p-2">
         <h2 class="font-bold text-xl">Friends</h2>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-        </svg>
+        </svg> -->
     </div>
 
     <div class="mt-2">

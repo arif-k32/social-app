@@ -27,24 +27,25 @@ export class ProfileComponent implements OnInit  {
 
   public getCurrUser():void{
     this.profileHttp.getCurrentUser().subscribe((response)=>{ 
-                                              // response.picture=environment.api+'/pictures/'+response.picture;
+                                              this.setUploadButton();
                                               this.user_profile=response;
-                                              this.toggleUploadButton();
                                             })
   }
   public getProfile(username:string):void{
     this.profileHttp.getProfile(username).subscribe((profile)=> {
-                                                // profile.picture=environment.api+'/pictures/'+profile.picture;
+                                                this.unSetUploadButton();
                                                 this.user_profile=profile ;
-
                                           });
   }
 
   public toggleUploadProfile():void{
       this.uploadProfile=!this.uploadProfile;
   }
-  public toggleUploadButton():void{
-     this.uploadButton=!this.uploadButton;
+  public setUploadButton():void{
+     this.uploadButton=true;
+  }
+  public unSetUploadButton():void{
+    this.uploadButton=false;
   }
 
   public uploadProfilePic(fileToUpload:FormData):void{

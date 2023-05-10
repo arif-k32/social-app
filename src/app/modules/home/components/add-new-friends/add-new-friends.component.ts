@@ -21,18 +21,15 @@ export class AddNewFriendsComponent implements OnInit {
 
   public loadAvailableUsers():void{
     this.friendsHttp.getAvailableUsers().subscribe((response:any)=>{
-                                                // for(let user of response){
-                                                //   this.profileHttp.getProfile(user.username).subscribe((resonse)=>{  user.profile_pic=environment.api+"/pictures/"+resonse.picture  })
-                                                // }
+                                                for(let user of response){
+                                                  this.profileHttp.getProfile(user.username).subscribe((resonse)=>{  user.profile_pic=resonse.picture  })
+                                                }
                                                 response=response.filter((user:any)=> user.friendship == false)
                                                 this.availableUsers=response;
                                           })
   }
   public loadFriendRequests():void{
     this.friendsHttp.friendRequests().subscribe((requests:any)=>{
-                                              // for (const request of requests) {
-                                              //     request.sender.picture=environment.api+'/pictures/'+request.sender.picture;
-                                              // }
                                               requests=requests.filter((request:any)=>request.status == 'pending')
                                               this.friendRequests=requests;
                                         })

@@ -69,7 +69,6 @@ export class PostCardComponent implements OnInit {
                                                                         let comment = { first_name, last_name, username, content, picture, created_at };
                                                                         comment.content=response.comment.content;
                                                                         comment.created_at=response.comment.created_at;
-                                                                        // comment.picture=environment.api+'/pictures/'+comment.picture
                                                                         this.post.post.comments.push(comment);
                                                                         this.post.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
                                                                         this.post.comments.push(comment);
@@ -80,8 +79,6 @@ export class PostCardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // for(let comment of this.post.comments)
-    //       comment.picture = environment.api+'/pictures/'+comment.picture;
     this.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
     this.post.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
     this.commentForm.controls['post_id'].setValue(this.post.post.id);
