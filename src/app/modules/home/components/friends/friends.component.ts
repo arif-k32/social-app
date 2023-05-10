@@ -28,7 +28,7 @@ export class FriendsComponent implements OnInit {
   public loadFriends():void{
     this.friendsHttp.getCurrentFriends().subscribe((response:any)=> {
                                             for(let friend of response){
-                                              // friend.profile_pic=environment.api+'/pictures/'+friend.picture;
+                                              friend.profile_pic=friend.picture;
                                               friend.active=true;
                                             }
                                             this.friends = response; 
