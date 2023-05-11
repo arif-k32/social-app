@@ -9,24 +9,24 @@ export class AuthenticationHttpService {
 
       constructor(private readonly profileHttp:ProfileHttpService) { }
 
-      public isAuthorized(){
+      public isAuthorized():Observable<boolean>{
               if(localStorage.getItem('access_token')){
                   return this.profileHttp.getCurrentUser().pipe(map((response:any)=>{ 
                                                                         if(response)
-                                                                            return 'true';
+                                                                            return true;
                                                                         else  
-                                                                            return 'false';
+                                                                            return false;
                                                                   }),
                                                                 catchError((error:any)=>{
                                                                       console.log(error);
-                                                                      return of('false')
+                                                                      return of(false)
                                                                   })
                                                               
                                                             )
                                                       
               }
               else
-                  return of('false');
+                  return of(false);
       }
 
 

@@ -36,10 +36,6 @@ export class FriendsComponent implements OnInit {
                                           })
   }
 
-  public reRouteToProfile(username:string):void{
-    this.router.navigate(['profile'],{queryParams:{username:username}});
-  }
-
 
 
   

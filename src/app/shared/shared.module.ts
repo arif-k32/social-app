@@ -3,10 +3,11 @@ import { UploadPhotoModelComponent } from "./components/upload-photo-model/uploa
 import { ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { PostCardComponent } from './components/post-card/post-card.component';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     declarations:[ UploadPhotoModelComponent, PostCardComponent ],
-    imports:[ CommonModule,ReactiveFormsModule ],
+    imports:[ CommonModule,ReactiveFormsModule ,RouterModule],
     providers:[],
     exports:[UploadPhotoModelComponent,[PostCardComponent]]
 

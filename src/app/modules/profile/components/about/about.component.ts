@@ -70,7 +70,6 @@ export class AboutComponent implements OnInit {
 
     public getCurrUser():void{
       this.profileHttp.getCurrentUser().subscribe((response)=>{ 
-                                                // response.picture=environment.api+'/pictures/'+response.picture;
                                                 this.updateProfileForm.patchValue(response)
                                                 this.user_profile=response;
                                                 this.toggleEditMode();
@@ -78,7 +77,6 @@ export class AboutComponent implements OnInit {
     }
     public getProfile(username:string):void{
       this.profileHttp.getProfile(username).subscribe((profile)=> {
-                                                  // profile.picture=environment.api+'/pictures/'+profile.picture;
                                                   this.updateProfileForm.patchValue(profile)
                                                   this.user_profile=profile ;
   

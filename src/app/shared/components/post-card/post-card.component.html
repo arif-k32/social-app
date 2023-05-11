@@ -3,7 +3,7 @@
             <div class="flex flex-row m-1">
               <img class="w-14 h-14 rounded-full overflow-hidden object-cover" [src]="post.author.picture" alt="profile-pic">
               <div class="ml-2">
-                  <h2 (click)="reRouteToProfile(post.author.username)" class="font-bold hover:text-blue-500 cursor-pointer" >{{post.author.first_name+' '+post.author.last_name}}</h2>
+                  <a routerLink="/timeline" [queryParams]="{username:post.author.username}"><h2  class="font-bold hover:text-blue-500 cursor-pointer" >{{post.author.first_name+' '+post.author.last_name}}</h2></a>
                   <p>{{calculateCreationTime(post.post.created_at)}}</p>
               </div>
             </div>
@@ -12,7 +12,7 @@
             </svg>
           </div>
 
-          <img class="max-h-[450px] object-cover w-full overflow-hidden " [src]="post.post.picture" alt="post-from-paul">
+          <img class=" w-full overflow-hidden " [src]="post.post.picture" alt="post-from-paul">
 
 
           <div class="w-full text-left">
@@ -37,40 +37,41 @@
         </button>
       </div>
 
-      <div *ngIf="commentSection" class="w-[98%] h-3/4 absolute bottom-1 bg-gray-500 rounded-md border ">
+      <div *ngIf="commentSection" class="w-[98%] h-96 absolute bottom-1 bg-gray-500 rounded-md border ">
         <!-- <div (click)="toggleCommentSection()" class="cursor-pointer hover:text-red-500 absolute top-2 right-2">X</div> -->
-        <div (click)="toggleCommentSection()" class="cursor-pointer hover:text-red-500 absolute top-2 right-2 w-5 h-5 bg-black/30 rounded-full overflow-hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </div>
-
-        <div class="w-full h-full p-3 flex flex-col  space-y-3 overflow-y-scroll">
-
-
-          <div *ngFor="let comment of post.comments;let i = index" class="bg-gray-100 w-full flex items-start space-x-2 p-1 rounded-md " >
-            <div class=" w-10 h-10 m-1 shrink-0"> 
-              <img class="h-full w-full border-2 border-black object-cover rounded-full overflow-hidden" [src]="comment.picture" >
-            </div>
-            
-            <div class="flex flex-col overflow-hidden" >
-                <div class="flex items-center space-x-2">
-                    <p (click)="reRouteToProfile(comment.username)" class="font-medium hover:text-blue-500 cursor-pointer" >{{comment.first_name+' '+comment.last_name}}</p>
-                    <p class="text-sm">{{calculateCreationTime(comment.created_at)}}</p>
-                </div>
-                <div >
-                  <p class="">{{post.post.comments[i].content}}</p>
-                </div>
-            </div>
-
+          <div (click)="toggleCommentSection()" class="cursor-pointer hover:text-red-500 absolute top-2 right-2 w-5 h-5 bg-black/30 rounded-full overflow-hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </div>
+
+        <div class="w-full h-full p-3 flex flex-col mb-10 space-y-3 overflow-y-scroll">
+
+
+              <div *ngFor="let comment of post.comments;let i = index" class="bg-gray-100 w-full flex items-start space-x-2 p-1 rounded-md " >
+                <div class=" w-10 h-10 m-1 shrink-0"> 
+                  <img class="h-full w-full border-2 border-black object-cover rounded-full overflow-hidden" [src]="comment.picture" >
+                </div>
+                
+                <div class="flex flex-col overflow-hidden" >
+                    <div class="flex items-center space-x-2">
+                        <a routerLink="/timeline" [queryParams]="{username:comment.username}"><p class="font-medium hover:text-blue-500 cursor-pointer" >{{comment.first_name+' '+comment.last_name}}</p></a>
+                        
+                        <p class="text-sm">{{calculateCreationTime(comment.created_at)}}</p>
+                    </div>
+                    <div >
+                      <p class="">{{post.post.comments[i].content}}</p>
+                    </div>
+                </div>
+
+              </div>
 
         </div>
 
         <div class=" absolute bottom-0 bg-gray-500 flex items-center p-1 w-full rounded-md">
             <img class="h-10 w-10 object-cover rounded-full overflow-hidden m-1" [src]="post.curr_user.picture" >
             <form [formGroup]="commentForm" class=" w-full relative flex items-center">
-              <input formControlName="content" class="w-full border px-1 py-2 rounded-md" type="text" placeholder="Comment on {{post.first_name+' '+post.last_name}}'s photo ......">
+              <input (keydown.enter)="commentOnPost()" formControlName="content" class="w-full border px-1 py-2 rounded-md" type="text" placeholder="Comment on {{post.author.first_name+' '+post.author.last_name}}'s photo ......">
               <svg (click)="commentOnPost()" class="bg-white w-6 h-6 absolute  hover:text-blue-500 cursor-pointer right-1 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
               </svg>

@@ -55,18 +55,44 @@ export class ProfileComponent implements OnInit  {
                                                         })
   }
 
-  ngOnInit(): void {
+  public check_QueryParams(currUser:any):void{
     this.activatedRoute.queryParams.subscribe((params:{[username:string]:string})=>{
-            this.profileHttp.getCurrentUser().subscribe((currUser)=>{
-                                                    if(params['username'] && (params['username'] != currUser.username)){
-                                                        this.getProfile(params['username']);
-                                                    }
-                                                    else{
-                                                      this.getCurrUser();
-                                                    }
-                                              })
-                                            
-                                      })
+                                        if(params['username'] && (params['username'] != currUser.username)){
+                                            this.getProfile(params['username']);
+                                        }
+                                        else{
+                                          this.getCurrUser();
+                                        }
+                                  })
+  }
+
+
+  public check_Params():void{
+    this.activatedRoute.params.subscribe((param:{[username:string]:string})=>{
+      this.profileHttp.getCurrentUser().subscribe((currUser)=>{
+                                  if(param['username']){
+                                        if(param['username']!= currUser.username )
+                                            this.getProfile(param['username']);
+                                        else
+                                            this.getCurrUser();
+                                  }
+                                  else{
+                                       this.check_QueryParams(currUser) ;
+
+                                  }
+                                  
+
+                              })
+                  })
+
+
+  }
+
+  
+
+  ngOnInit(): void {
+    this.check_Params();
+    
   }
 
   

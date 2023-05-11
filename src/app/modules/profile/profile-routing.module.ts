@@ -16,8 +16,7 @@ const routes: Routes = [
                             children:[
                                         {
                                           path:'',
-                                          redirectTo:'timeline',
-                                          pathMatch:'full'
+                                          component:TimelineComponent
                                         },
                                         {
                                           path:'timeline',

@@ -4,8 +4,10 @@
         
         <div *ngFor="let friend of friends" class="bg-gray-100 p-2 flex items-center justify-between">
             <div class="flex items-center">
+                
                 <img class="mr-2 w-9 h-9 overflow-hidden object-cover rounded-full" [src]="friend.profile_pic" >
-                <h2 (click)="reRouteToProfile(friend.username)" class="font-medium hover:text-blue-500 cursor-pointer">{{friend.first_name+' '+friend.last_name}}</h2>
+                <a routerLink="/timeline" [queryParams]="{username:friend.username}"><h2  class="font-medium hover:text-blue-500 cursor-pointer">{{friend.first_name+' '+friend.last_name}}</h2></a>
+                
             </div>
             <!-- <svg class="w-2 h-2 " [ngClass]="{'fill-green-500':friend.active}"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"   stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg> -->
         </div>

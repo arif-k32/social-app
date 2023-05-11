@@ -44,9 +44,7 @@ export class AddNewFriendsComponent implements OnInit {
       this.friendsHttp.acceptFriendRequest(username).subscribe((r)=>console.log(this.loadFriendRequests()))
   }
 
-  public reRouteToProfile(username:string):void{
-      this.router.navigate(['profile'],{queryParams:{username:username}});
-  }
+
 
   
 

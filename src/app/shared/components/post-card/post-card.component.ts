@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentsHttpService } from 'src/app/core/http/api/comments/comments-http.service';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 import { environment } from 'src/environments/environment';
@@ -21,14 +21,12 @@ export class PostCardComponent implements OnInit {
  
 
 
-  constructor(private readonly commentsHttp:CommentsHttpService, private readonly router:Router){}
+  constructor(private readonly commentsHttp:CommentsHttpService, private readonly router:Router,private readonly activatedRoute:ActivatedRoute){}
 
   public toggleCommentSection():void{
      this.commentSection=!this.commentSection;
   }
-  public reRouteToProfile(username:string):void{
-    this.router.navigate(['profile'],{queryParams:{username:username}});
-  }
+  
 
 
   public calculateCreationTime(created_at:string):string{
@@ -69,10 +67,8 @@ export class PostCardComponent implements OnInit {
                                                                         let comment = { first_name, last_name, username, content, picture, created_at };
                                                                         comment.content=response.comment.content;
                                                                         comment.created_at=response.comment.created_at;
-                                                                        this.post.post.comments.push(comment);
-                                                                        this.post.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
-                                                                        this.post.comments.push(comment);
-                                                                        this.post.comments.sort((a:any, b: any) => {   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();   });
+                                                                        this.post.post.comments.unshift(comment);
+                                                                        this.post.comments.unshift(comment);
                                                                 });
   }
 

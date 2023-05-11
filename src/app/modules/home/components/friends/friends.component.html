@@ -8,13 +8,13 @@
             </div>
             <div>
                 <ng-container *ngIf="curr_user">
-                    <h2 (click)="reRouteToProfile(curr_user.username)" class="font-bold text-xl hover:text-blue-500 cursor-pointer">{{ curr_user.first_name+' '+curr_user.last_name }}</h2>
+                    <a routerLink="/timeline" [queryParams]="{username:curr_user?.username}"><h2  class="font-bold text-xl hover:text-blue-500 cursor-pointer">{{ curr_user.first_name+' '+curr_user.last_name }}</h2></a>
                 </ng-container>
             </div>
             
             
         </div>
-        <a routerLink="./../profile" [queryParams]="{username:curr_user?.username}" class="hover:bg-black/10 rounded-full overflow-hidden p-1">
+        <a routerLink="/timeline" [queryParams]="{username:curr_user?.username}" class="hover:bg-black/10 rounded-full overflow-hidden p-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-blue-500 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
@@ -36,7 +36,8 @@
         <div *ngFor="let friend of friends" class="p-2 flex items-center justify-between">
             <div class="flex items-center">
                 <img class="mr-2 w-9 h-9 overflow-hidden object-cover rounded-full" [src]="friend.profile_pic" >
-                <h2 (click)="reRouteToProfile(friend.username)" class="font-medium hover:text-blue-500 cursor-pointer" >{{friend.first_name+' '+friend.last_name}}</h2>
+                <a routerLink="/timeline" [queryParams]="{username:friend.username}" ><h2  class="font-medium hover:text-blue-500 cursor-pointer" >{{friend.first_name+' '+friend.last_name}}</h2></a>
+                
             </div>
             <svg class="w-2 h-2 " [ngClass]="{'fill-green-500':friend.active}"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"   stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
         </div>

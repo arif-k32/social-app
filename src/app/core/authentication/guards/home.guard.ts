@@ -10,8 +10,8 @@ export class HomeGuard implements CanActivate, CanActivateChild {
   constructor(private readonly authenticationHttp:AuthenticationHttpService, private readonly router:Router){}
 
   public getAuth(){
-                      this.authenticationHttp.isAuthorized().subscribe((response:any)=>{
-                                                                      if(response=='false')
+                      this.authenticationHttp.isAuthorized().subscribe((response:boolean)=>{
+                                                                      if(response==false)
                                                                       {
                                                                         this.router.navigate(['/login']);
                                                                         return false;

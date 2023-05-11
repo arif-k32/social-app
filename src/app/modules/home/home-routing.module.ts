@@ -16,8 +16,7 @@ const routes: Routes = [
                             children:[
                                         {
                                           path:'',
-                                          redirectTo:'posts',
-                                          pathMatch:'full'
+                                          component:PostsComponent
                                         },
                                         {
                                           path:'posts',

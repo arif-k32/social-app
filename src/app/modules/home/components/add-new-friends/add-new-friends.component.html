@@ -12,7 +12,8 @@
             <div class="flex items-center ml-2">
                 <img class="rounded-full w-10 h-10 mr-2" [src]="user.profile_pic" >
                 <div class="flex flex-col items-start">
-                    <h3 (click)="reRouteToProfile(user.username)"  class="font-medium hover:text-blue-500 cursor-pointer">{{user.first_name+' '+user.last_name}}</h3>
+                    <a routerLink="/timeline" [queryParams]="{username:user.username}"><h3  class="font-medium hover:text-blue-500 cursor-pointer">{{user.first_name+' '+user.last_name}}</h3></a>
+                    
                     <p class="text-sm text-gray-500">New to Social app</p>
                 </div>
             </div>
@@ -33,7 +34,8 @@
             <div class="flex items-center ml-2">
                 <img class="rounded-full w-10 h-10 mr-2" [src]="request.sender.picture" >
                 <div class="flex flex-col items-start">
-                    <h3 (click)="reRouteToProfile(request.sender.username)" class="font-medium hover:text-blue-500 cursor-pointer">{{request.sender.first_name+' '+request.sender.last_name}}</h3>
+                    <a routerLink="/timeline" [queryParams]="{username:request.sender.username}"><h3 class="font-medium hover:text-blue-500 cursor-pointer">{{request.sender.first_name+' '+request.sender.last_name}}</h3></a>
+                    
                     <p class="text-sm text-gray-500">New to Social app</p>
                 </div>
             </div>
