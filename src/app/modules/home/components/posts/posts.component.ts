@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map, switchMap } from 'rxjs';
 import { FriendsHttpService } from 'src/app/core/http/api/friends/friends-http.service';
 import { PostsHttpService } from 'src/app/core/http/api/posts/posts-http.service';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
@@ -49,7 +50,6 @@ export class PostsComponent implements OnInit {
                                                       allPosts= allPosts.concat(posts)
                                                       allPosts.sort((a: IPosts, b: IPosts) => {   return new Date(b.post.created_at).getTime() - new Date(a.post.created_at).getTime();   });
                                                       this.posts=allPosts;
-
                                                     })
                                     }
 
@@ -79,8 +79,9 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
 
             this.getAllFriendsPosts();
-
   }
+
+ 
   
   
 }

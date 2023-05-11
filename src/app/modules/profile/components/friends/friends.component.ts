@@ -17,12 +17,7 @@ export class FriendsComponent implements OnInit {
 
   public loadFriends():void{
     this.friendsHttp.getCurrentFriends().subscribe((response:any)=> {
-                                           let uniqueFriends:any[]=[];
-                                            for (let friend of response){
-                                              let  isFriendPresent:Boolean=uniqueFriends.some((uniqueFriend:any)=> uniqueFriend.username ==  friend.username);
-                                              if(!isFriendPresent)
-                                                  uniqueFriends.push(friend);
-                                            }
+                                           let uniqueFriends:any[]=response.filter((obj:any, index:any, self:any) => index === self.findIndex((o:any) => o.username === obj.username));
                                             for(let friend of uniqueFriends){
                                               friend.profile_pic=friend.picture;
                                               friend.active=true;
