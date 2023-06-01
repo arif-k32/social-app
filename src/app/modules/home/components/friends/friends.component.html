@@ -1,5 +1,5 @@
 <div class="p-3 h-full overflow-y-scroll dark:bg-gray-700">
-    <div class="p-2 flex items-center justify-between">
+    <a routerLink="/timeline" [queryParams]="{username:curr_user?.username}" class="p-2 flex items-center justify-between">
         <div class="flex items-center">
             <div class="mr-2 w-14 h-14 ">
                 <ng-container *ngIf="curr_user">
@@ -8,19 +8,19 @@
             </div>
             <div>
                 <ng-container *ngIf="curr_user">
-                    <a routerLink="/timeline" [queryParams]="{username:curr_user?.username}"><h2  class="dark:text-white font-bold text-xl hover:text-blue-500 cursor-pointer">{{ curr_user.first_name+' '+curr_user.last_name }}</h2></a>
+                    <a ><h2  class="dark:text-white font-bold text-xl hover:text-blue-500 cursor-pointer">{{ curr_user.first_name+' '+curr_user.last_name }}</h2></a>
                 </ng-container>
             </div>
             
             
         </div>
-        <a routerLink="/timeline" [queryParams]="{username:curr_user?.username}" class="hover:bg-black/10 rounded-full overflow-hidden p-1">
+        <a  class="hover:bg-black/10 rounded-full overflow-hidden p-1">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-blue-500 w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
         </a>
         
-    </div>
+    </a>
     
 
     <hr class='my-2'>

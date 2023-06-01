@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DarkModeService } from './shared/services/dark-mode.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,6 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class AppComponent {
   title = 'social-media';
-  public darkMode:boolean = false;
-  constructor(private readonly darkModeService:DarkModeService){
-    this.darkMode=darkModeService.initializeDarkMode();
-  }
-  public watchDarkModeSubscription:Subscription = this.darkModeService.watchDarkMode()
-                                                      .subscribe( (response:boolean) => this.darkMode=response  );
+  public darkMode$:Observable<boolean>=this.darkModeService.watchDarkMode();
+  constructor(private readonly darkModeService:DarkModeService){  }
 }

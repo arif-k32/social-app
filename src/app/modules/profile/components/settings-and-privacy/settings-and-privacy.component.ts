@@ -6,17 +6,12 @@ import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
   templateUrl: './settings-and-privacy.component.html',
 })
 export class SettingsAndPrivacyComponent  {
-  public darkMode:boolean=false;
 
-  constructor(private readonly darkModeService:DarkModeService){
-      this.darkMode=darkModeService.initializeDarkMode();
-  }
+  constructor(private readonly darkModeService:DarkModeService){}
 
 
   public toggleDarkMode():void{
-    this.darkMode=!this.darkMode;
-    this.darkModeService.onDarkModeChange(this.darkMode)
-    localStorage.setItem('darkMode',this.darkMode.toString());
+    this.darkModeService.toggleDarkMode();
   }
 
   

@@ -1,8 +1,6 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthenticationHttpService } from 'src/app/core/http/api/authentication/authentication-http.service';
-import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +8,7 @@ import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
 })
 export class SettingsComponent implements OnInit {
 
-  public logOutButton:boolean=false;
+  public logOutButton:boolean=true;
   public settingsAndPrivacy:boolean=false;
 
   constructor(private readonly router:Router,private readonly authenticationHttp:AuthenticationHttpService){}
@@ -27,8 +25,8 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
       this.authenticationHttp.isAuthorized().subscribe((auth:boolean)=>{
-                                                    if(auth)
-                                                        this.logOutButton=true;
+                                                    if(!auth)
+                                                        this.logOutButton=false;
                                               })
 
   }

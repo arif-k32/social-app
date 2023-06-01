@@ -15,15 +15,10 @@ export class LoginComponent {
                                                   password: new FormControl('2356',Validators.required)
                                               })
 
-  public darkMode:boolean = false;
 
-  constructor(private readonly router:Router, private readonly loginHttp:LoginHttpService,private readonly darkModeService:DarkModeService){
-      this.darkMode=darkModeService.initializeDarkMode();
-  }
+  constructor(private readonly router:Router, private readonly loginHttp:LoginHttpService,private readonly darkModeService:DarkModeService){}
   public toggleDarkMode():void{
-    this.darkMode=!this.darkMode;
-    this.darkModeService.onDarkModeChange(this.darkMode)
-    localStorage.setItem('darkMode',this.darkMode.toString());
+    this.darkModeService.toggleDarkMode();
   }
 
   

@@ -1,27 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DarkModeService {
+export class DarkModeService  {
 
-  private darkModeSubject = new Subject<boolean>();
+  private darkModeSubject:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); //sets default value
 
-  public initializeDarkMode():boolean { 
-      if(localStorage.getItem('darkMode')== 'true')
-        return true;
-      else{
-        localStorage.setItem('darkMode','false');
-        return false;
-      }
+  constructor(){
+      this.initializeDarkMode();
+  }
+
+  public initializeDarkMode():void { 
+        const storedMode = localStorage.getItem('darkMode');
+        const currentMode = storedMode !== null ? JSON.parse(storedMode) : null;
+        if(currentMode == null){
+          const defaultMode = this.darkModeSubject.value;
+          this.darkModeSubject.next(defaultMode);
+          localStorage.setItem('darkMode',defaultMode.toString())
+        }
+        else{
+          this.darkModeSubject.next(currentMode)
+        }
+  
   }
 
   public watchDarkMode():Observable<boolean>{
       return this.darkModeSubject.asObservable();
   }
-  public onDarkModeChange(value:boolean):void{
-      this.darkModeSubject.next(value);
+  public toggleDarkMode():void{
+      localStorage.setItem('darkMode',JSON.stringify(!this.darkModeSubject.value))
+      this.darkModeSubject.next(!this.darkModeSubject.value)
   }
+
+
+  
 
 }
