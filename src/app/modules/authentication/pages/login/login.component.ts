@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginHttpService } from 'src/app/core/http/api/login/login-http.service';
+import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,17 @@ export class LoginComponent {
                                                   password: new FormControl('2356',Validators.required)
                                               })
 
-  constructor(private readonly router:Router, private readonly loginHttp:LoginHttpService){}
+  public darkMode:boolean = false;
 
-  
-  
+  constructor(private readonly router:Router, private readonly loginHttp:LoginHttpService,private readonly darkModeService:DarkModeService){
+      this.darkMode=darkModeService.initializeDarkMode();
+  }
+  public toggleDarkMode():void{
+    this.darkMode=!this.darkMode;
+    this.darkModeService.onDarkModeChange(this.darkMode)
+    localStorage.setItem('darkMode',this.darkMode.toString());
+  }
+
   
   public toggleCreateAccount():void{
       this.createAccount=!this.createAccount;
@@ -33,8 +41,7 @@ export class LoginComponent {
   
   }
 
-
-  
+ 
 
   
 }

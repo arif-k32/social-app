@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center bg-white rounded-xl overflow-hidden mb-4 w-full relative border">
+<div class="flex flex-col items-center bg-white dark:bg-gray-600 dark:text-white rounded-xl overflow-hidden mb-4 w-full relative border">
           <div class="w-full flex justify-between items-center "> 
             <div class="flex flex-row m-1">
               <img class="w-14 h-14 rounded-full overflow-hidden object-cover" [src]="post.author.picture" alt="profile-pic">
@@ -12,7 +12,7 @@
             </svg>
           </div>
 
-          <img class=" w-full overflow-hidden " [src]="post.post.picture" alt="post-from-paul">
+          <img class=" w-full min-h-[450px] object-contain " [src]="post.post.picture" alt="post-from-paul">
 
 
           <div class="w-full text-left">
@@ -21,23 +21,23 @@
 
           
 
-          <div class="flex justify-start my-3 w-full">
-          <button class="flex items-center py-1 px-4 rounded-full bg-gray-100 ml-3">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1 text-blue-500 w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
-            </svg>
-            <p>Like</p>
-          </button>
-          <button class="flex items-center py-1 px-4 rounded-full bg-gray-100 ml-3">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1 text-blue-500 w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-          </svg>
-          <p (click)="toggleCommentSection()" class="hover:text-blue-500 cursor-pointer">Comments</p>
-          <p class="ml-1">{{post.comments.length}}</p>
-        </button>
+          <div class="flex justify-start my-3 w-full ">
+              <button class="flex items-center py-1 px-4 rounded-full bg-gray-100 dark:bg-gray-500 ml-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1 text-blue-500 w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                </svg>
+                <p>Like</p>
+              </button>
+              <button (click)="toggleCommentSection()" class="flex items-center py-1 px-4 rounded-full bg-gray-100 dark:bg-gray-500 ml-3 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1 text-blue-500 w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+              </svg>
+              <p  class="hover:text-blue-500 ">Comments</p>
+              <p class="ml-1">{{post.comments.length}}</p>
+            </button>
       </div>
 
-      <div *ngIf="commentSection" class="w-[98%] h-96 absolute bottom-1 bg-gray-500 rounded-md border ">
+      <div *ngIf="commentSection" class="w-[98%] h-96 absolute bottom-1 bg-gray-500 rounded-md border p-1 ">
         <!-- <div (click)="toggleCommentSection()" class="cursor-pointer hover:text-red-500 absolute top-2 right-2">X</div> -->
           <div (click)="toggleCommentSection()" class="cursor-pointer hover:text-red-500 absolute top-2 right-2 w-5 h-5 bg-black/30 rounded-full overflow-hidden">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
@@ -48,7 +48,7 @@
         <div class="w-full h-full p-3 flex flex-col mb-10 space-y-3 overflow-y-scroll">
 
 
-              <div *ngFor="let comment of post.comments;let i = index" class="bg-gray-100 w-full flex items-start space-x-2 p-1 rounded-md " >
+              <div *ngFor="let comment of post.comments;let i = index; " class="bg-gray-100 w-full flex items-start space-x-2 p-1 rounded-md " >
                 <div class=" w-10 h-10 m-1 shrink-0"> 
                   <img class="h-full w-full border-2 border-black object-cover rounded-full overflow-hidden" [src]="comment.picture" >
                 </div>

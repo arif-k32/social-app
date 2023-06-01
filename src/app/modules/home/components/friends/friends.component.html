@@ -1,4 +1,4 @@
-<div class="p-3 h-full overflow-y-scroll">
+<div class="p-3 h-full overflow-y-scroll dark:bg-gray-700">
     <div class="p-2 flex items-center justify-between">
         <div class="flex items-center">
             <div class="mr-2 w-14 h-14 ">
@@ -8,7 +8,7 @@
             </div>
             <div>
                 <ng-container *ngIf="curr_user">
-                    <a routerLink="/timeline" [queryParams]="{username:curr_user?.username}"><h2  class="font-bold text-xl hover:text-blue-500 cursor-pointer">{{ curr_user.first_name+' '+curr_user.last_name }}</h2></a>
+                    <a routerLink="/timeline" [queryParams]="{username:curr_user?.username}"><h2  class="dark:text-white font-bold text-xl hover:text-blue-500 cursor-pointer">{{ curr_user.first_name+' '+curr_user.last_name }}</h2></a>
                 </ng-container>
             </div>
             
@@ -26,7 +26,7 @@
     <hr class='my-2'>
 
     <div class="flex items-center justify-between p-2">
-        <h2 class="font-bold text-xl">Friends</h2>
+        <h2 class="dark:text-white font-bold text-xl">Friends</h2>
         <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
         </svg> -->
@@ -36,7 +36,7 @@
         <div *ngFor="let friend of friends" class="p-2 flex items-center justify-between">
             <div class="flex items-center">
                 <img class="mr-2 w-9 h-9 overflow-hidden object-cover rounded-full" [src]="friend.profile_pic" >
-                <a routerLink="/timeline" [queryParams]="{username:friend.username}" ><h2  class="font-medium hover:text-blue-500 cursor-pointer" >{{friend.first_name+' '+friend.last_name}}</h2></a>
+                <a routerLink="/timeline" [queryParams]="{username:friend.username}" ><h2  class="dark:text-white font-medium hover:text-blue-500 cursor-pointer" >{{friend.first_name+' '+friend.last_name}}</h2></a>
                 
             </div>
             <svg class="w-2 h-2 " [ngClass]="{'fill-green-500':friend.active}"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"   stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>

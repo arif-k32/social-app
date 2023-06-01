@@ -16,6 +16,7 @@ import { CommentsHttpService } from 'src/app/core/http/api/comments/comments-htt
 import { FriendsHttpService } from 'src/app/core/http/api/friends/friends-http.service';
 import { PostsHttpService } from 'src/app/core/http/api/posts/posts-http.service';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
+import { SettingsAndPrivacyComponent } from './components/settings-and-privacy/settings-and-privacy.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.s
     SettingsComponent,
     SuggestionsComponent,
     TimelineComponent,
+    SettingsAndPrivacyComponent,
    
 
   ],

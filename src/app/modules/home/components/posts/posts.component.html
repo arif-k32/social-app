@@ -1,6 +1,6 @@
-<div class=" bg-gray-100 h-full p-6 overflow-scroll">
+<div class=" bg-gray-100 dark:bg-gray-500 h-full p-6 overflow-scroll">
 
-    <div class="bg-white rounded-2xl p-5">
+    <div class="bg-white dark:bg-gray-600 dark:text-white rounded-2xl p-5">
         <h2 class="font-bold">
           <span>What's on your mind ?</span>
           <span *ngIf="curr_user" class="ml-1">{{curr_user?.first_name+' '+curr_user?.last_name}}</span>
@@ -17,7 +17,7 @@
 
 
 
-    <div *ngFor="let post of posts">
+    <div *ngFor="let post of posts; trackByUserName">
 
       <app-post-card [post]="post"></app-post-card>
         

@@ -6,6 +6,7 @@ import { RegisterHttpService } from 'src/app/core/http/api/register/register-htt
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { LoginComponent } from './pages/login/login.component';
     CommonModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   providers:[LoginHttpService, RegisterHttpService]
 

@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { ProfileHttpService } from 'src/app/core/http/api/profile/profile-http.service';
 import { ICurr_user } from 'src/app/shared/interfaces/current-user/current-user.interface';
 import { NotifyService } from 'src/app/shared/services/notify.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -14,12 +13,14 @@ export class ProfileComponent implements OnInit  {
 
 
   public user_profile!:any;
-  public uploadButton=false;
-  public uploadProfile=false;
+  public uploadButton:boolean=false;
+  public uploadProfile:boolean=false;
 
 
 
-  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService, private readonly activatedRoute:ActivatedRoute ){  }
+  constructor(private readonly profileHttp:ProfileHttpService, private readonly notify:NotifyService, private readonly activatedRoute:ActivatedRoute ){ 
+  }
+  
 
   public notification:Subscription = this.notify.notificationToParent().subscribe((currUser:ICurr_user)=>{ 
           this.getCurrUser();
@@ -87,6 +88,8 @@ export class ProfileComponent implements OnInit  {
 
 
   }
+  
+
 
   
 

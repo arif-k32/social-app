@@ -18,11 +18,7 @@ export class PostsComponent implements OnInit {
   public postPhoto=false;
 
 
-  constructor( private readonly friendsHttp:FriendsHttpService, private readonly postsHttp:PostsHttpService, private readonly proflieHttp:ProfileHttpService){
-   
-        
-            
-  }
+  constructor( private readonly friendsHttp:FriendsHttpService, private readonly postsHttp:PostsHttpService, private readonly proflieHttp:ProfileHttpService){ }
 
 
   public togglePostPhoto():void{
@@ -67,9 +63,14 @@ export class PostsComponent implements OnInit {
 
   public getAllFriendsPosts():void{
     this.proflieHttp.getCurrentUser().subscribe((currUser:any)=>{
+                                            this.curr_user=currUser;
                                             this.getCurrentFriends(currUser);
                                        })
     
+  }
+
+  public trackByUserName(index: number, post: any): string {
+    return post.author.username; 
   }
 
   

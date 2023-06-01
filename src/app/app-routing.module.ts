@@ -7,6 +7,10 @@ const routes: Routes = [
                             loadChildren:()=>import('./modules/home/home.module').then((m)=>m.HomeModule)
                           },
                           {
+                            path:'login',
+                            loadChildren:()=>import('./modules/authentication/authentication.module').then((m)=>m.AuthenticationModule)
+                          },
+                          {
                             path:'home',
                             loadChildren:()=>import('./modules/home/home.module').then((m)=>m.HomeModule)
                           },
@@ -18,10 +22,7 @@ const routes: Routes = [
                             path:'profile',
                             loadChildren:()=>import('./modules/profile/profile.module').then((m)=>m.ProfileModule)
                           },
-                          {
-                            path:'login',
-                            loadChildren:()=>import('./modules/authentication/authentication.module').then((m)=>m.AuthenticationModule)
-                          },
+                          
                           {
                             path:':username',
                             loadChildren:()=>import('./modules/profile/profile.module').then((m)=>m.ProfileModule)

@@ -85,6 +85,9 @@ export class TimelineComponent implements OnInit {
   
   
     }
+    public trackByUserName(index: number, post: any): string {
+      return post.author.username; 
+    }
   
     
   

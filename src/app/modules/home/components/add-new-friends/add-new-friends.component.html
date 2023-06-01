@@ -1,20 +1,21 @@
-<div class=" bg-gray-100 h-full p-6  grid grid-cols-2 gap-2">
+<div class=" bg-gray-100 dark:bg-gray-500 dark:text-white h-full p-6  grid grid-cols-2 gap-2">
 
     <div class="h-full overflow-y-scroll relative">
-        <div class="sticky z-10 top-0 bg-gray-100 flex items-center justify-between p-2 border-b">
+        <div class="sticky z-10 top-0 bg-gray-100 dark:bg-gray-500 flex items-center justify-between p-2 border-b">
+
             <h2 class="font-bold text-xl">Suggested for you</h2>
             <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg> -->
         </div>
     
-        <div *ngFor="let user of availableUsers" class="my-4 flex justify-between items-center bg-white p-2 rounded-sm ">
+        <div *ngFor="let user of availableUsers" class="my-4 flex justify-between items-center bg-white p-2 rounded-sm dark:bg-gray-600 ">
             <div class="flex items-center ml-2">
                 <img class="rounded-full w-10 h-10 mr-2" [src]="user.profile_pic" >
                 <div class="flex flex-col items-start">
                     <a routerLink="/timeline" [queryParams]="{username:user.username}"><h3  class="font-medium hover:text-blue-500 cursor-pointer">{{user.first_name+' '+user.last_name}}</h3></a>
                     
-                    <p class="text-sm text-gray-500">New to Social app</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-300">New to Social app</p>
                 </div>
             </div>
             <p (click)="sendFriendRequest(user.username)" class="text-blue-500 cursor-pointer hover:text-black">Follow</p>
@@ -23,20 +24,20 @@
     </div>
 
     <div class="h-full overflow-y-scroll relative">
-        <div class="sticky z-10 top-0 bg-gray-100 flex items-center justify-between p-2 border-b">
+        <div class="sticky z-10 top-0 bg-gray-100 dark:bg-gray-500 flex items-center justify-between p-2 border-b">
             <h2 class="font-bold text-xl">Friend requests</h2>
             <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg> -->
         </div>
 
-        <div *ngFor="let request of friendRequests" class="my-4 flex justify-between items-center bg-white p-2 rounded-sm ">
+        <div *ngFor="let request of friendRequests" class="my-4 flex justify-between items-center bg-white p-2 rounded-sm dark:bg-gray-600 ">
             <div class="flex items-center ml-2">
                 <img class="rounded-full w-10 h-10 mr-2" [src]="request.sender.picture" >
                 <div class="flex flex-col items-start">
                     <a routerLink="/timeline" [queryParams]="{username:request.sender.username}"><h3 class="font-medium hover:text-blue-500 cursor-pointer">{{request.sender.first_name+' '+request.sender.last_name}}</h3></a>
                     
-                    <p class="text-sm text-gray-500">New to Social app</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-300">New to Social app</p>
                 </div>
             </div>
             <p (click)="acceptFriendRequest(request.sender.username)" class="text-blue-500 cursor-pointer hover:text-black">Accept</p>

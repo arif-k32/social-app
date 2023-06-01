@@ -6,10 +6,10 @@ import { PostCardComponent } from './components/post-card/post-card.component';
 import { RouterModule } from "@angular/router";
 
 @NgModule({
-    declarations:[ UploadPhotoModelComponent, PostCardComponent ],
+    declarations:[ UploadPhotoModelComponent, PostCardComponent,  ],
     imports:[ CommonModule,ReactiveFormsModule ,RouterModule],
     providers:[],
-    exports:[UploadPhotoModelComponent,[PostCardComponent]]
+    exports:[UploadPhotoModelComponent,PostCardComponent,]
 
 })
 export class SharedModule {}

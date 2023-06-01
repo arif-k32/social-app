@@ -1,8 +1,8 @@
-<div class="p-3 bg-white ">
+<div class="p-3 bg-white dark:bg-gray-600 ">
     <div class="mt-2 grid grid-cols-1 gap-2">
 
         
-        <div *ngFor="let friend of friends" class="bg-gray-100 p-2 flex items-center justify-between">
+        <div *ngFor="let friend of friends" class="bg-gray-100 dark:bg-gray-500 dark:text-white rounded-sm  p-2 flex items-center justify-between">
             <div class="flex items-center">
                 
                 <img class="mr-2 w-9 h-9 overflow-hidden object-cover rounded-full" [src]="friend.profile_pic" >

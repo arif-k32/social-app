@@ -15,7 +15,11 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const access_token= JSON.parse(localStorage.getItem('access_token') || '{}');
-    if(!request.url.includes('login')){
+    // const isPublicUrl = ( request.url.includes('login') || request.url.includes('profile')  || request.url.includes('timeline') || request.url.includes('photos') || request.url.includes('about')  );
+    const isPublicUrl  = (request.url.includes('login'));
+    // console.log(isPublicUrl);
+
+    if(  !  isPublicUrl  ){ 
       const authorizedRequest = request.clone({setHeaders:{Authorization:access_token}});
       return next.handle(authorizedRequest).pipe(catchError(this.handleErrors));
     }
@@ -26,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor {
         case 401:
           return throwError(()=> new Error ('Not Authorized'));
         default:
-          return throwError(()=> new Error('Error'));
+          return throwError(()=> new Error('Token Error'));
     }
   }
 }

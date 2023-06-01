@@ -11,8 +11,9 @@ import { environment } from 'src/environments/environment';
 export class AddNewFriendsComponent implements OnInit {
 
 
-  availableUsers!:any;
-  friendRequests!:any;
+  public availableUsers!:any;
+  public friendRequests!:any;
+  public darkMode:boolean=false;
 
 
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthenticationHttpService } from 'src/app/core/http/api/authentication/authentication-http.service';
+import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
 
 @Component({
   selector: 'app-settings',
@@ -8,13 +10,19 @@ import { AuthenticationHttpService } from 'src/app/core/http/api/authentication/
 })
 export class SettingsComponent implements OnInit {
 
-  logOutButton:boolean=false;
+  public logOutButton:boolean=false;
+  public settingsAndPrivacy:boolean=false;
 
   constructor(private readonly router:Router,private readonly authenticationHttp:AuthenticationHttpService){}
+
 
   public logOut():void{
     localStorage.removeItem('access_token');
     this.router.navigate(['login'])
+  }
+
+  public toggleSettingsAndPrivacy():void{
+    this.settingsAndPrivacy=!this.settingsAndPrivacy;
   }
 
   ngOnInit(): void {
@@ -22,5 +30,6 @@ export class SettingsComponent implements OnInit {
                                                     if(auth)
                                                         this.logOutButton=true;
                                               })
+
   }
 }
