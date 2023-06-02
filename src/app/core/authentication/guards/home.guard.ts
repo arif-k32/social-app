@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, CanActivateChild, CanActivateChildFn, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChildFn, Router } from '@angular/router';
 import { AuthenticationHttpService } from '../../http/api/authentication/authentication-http.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeGuard implements CanActivate, CanActivateChild {
+export class HomeGuard  {
 
   constructor(private readonly authenticationHttp:AuthenticationHttpService, private readonly router:Router){}
 
