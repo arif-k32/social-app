@@ -29,9 +29,11 @@ export class DarkModeService  {
   public watchDarkMode():Observable<boolean>{
       return this.darkModeSubject.asObservable();
   }
+
+
   public toggleDarkMode():void{
-      localStorage.setItem('darkMode',JSON.stringify(!this.darkModeSubject.value))
       this.darkModeSubject.next(!this.darkModeSubject.value)
+      localStorage.setItem('darkMode',JSON.stringify(!this.darkModeSubject.value))
   }
 
 
