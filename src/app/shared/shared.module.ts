@@ -4,12 +4,13 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { RouterModule } from "@angular/router";
+import { NavigationComponent } from "./components/navigation/navigation.component";
 
 @NgModule({
-    declarations:[ UploadPhotoModelComponent, PostCardComponent,  ],
+    declarations:[ UploadPhotoModelComponent, PostCardComponent, NavigationComponent ],
     imports:[ CommonModule,ReactiveFormsModule ,RouterModule],
     providers:[],
-    exports:[UploadPhotoModelComponent,PostCardComponent,]
+    exports:[UploadPhotoModelComponent,PostCardComponent, NavigationComponent]
 
 })
 export class SharedModule {}

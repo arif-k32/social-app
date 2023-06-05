@@ -1,51 +1,48 @@
-    <div class="bg-gray-100 dark:bg-gray-800 w-full h-full">
-        <section class="flex justify-center items-center w-full h-full  relative">
-            <div (click)="toggleDarkMode()" class="absolute right-3 top-3 flex space-x-3  cursor-pointer shadow-md dark:bg-gray-500  p-1 rounded-md">
-                    <p class="hover:text-blue-500 dark:text-white">Theme</p>
-                    <div>
-                        <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-black dark:text-white  fill-current">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                        </svg>
-                    </div>
-            </div>
-            <div class="overflow-auto dark:text-white w-3/8 p-4 mr-40 h-1/2 pt-24">
-                <h1 class="font-bold text-blue-600 text-5xl">Social App</h1>
-                <p class="break-words mt-3 font-semibold text-xl">Social app helps you connect and share <br> with the people in your life.</p>
-            </div>
-            <div class=" p-4 w-1/5 -mt-20 dark:bg-gray-500 shadow-xl bg-white rounded-md">
-                <form [formGroup]="loginForm" (ngSubmit)="login()" class="grid-rows-3 gap-2">
-                    <div class='mb-2 relative flex items-center'>
-                        <input formControlName="email" [ngClass]="{'border-red-500':getEmailValidators()}" class="mb-2  px-4 w-full rounded-md bg-white dark:bg-gray-500 dark:text-white border py-3 " type="text" placeholder="Email or phone">
-                        <!-- <p class="text-red-500 ml-1 absolute inset-y-0 z-20 right-0">Email  is required.</p> -->
-                        <svg *ngIf="getEmailValidators()" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                        </svg>
-                          
-                    </div>
-                    <div class="mb-2 relative flex items-center">
-                        <input formControlName="password" [ngClass]="{'border-red-500':loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched}" class="  px-4 w-full rounded-md bg-white dark:bg-gray-500 dark:text-white border py-2 " type="password" placeholder="Password" >
-                        <svg *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                        </svg>
-                    </div>
-                    <div class="w-full text-center  mb-2">
-                        <button [disabled]="!loginForm.valid" [ngClass]="{'opacity-80':!loginForm.valid}" class="bg-blue-500 w-full rounded-md text-white font-bold py-3 ">Log in</button>
-                    </div>
-                    <div class="w-full text-center border-b-2 pb-6 mb-6">
-                        <a  class="text-blue-400 hover:underline hover:cursor-pointer">Forgotten password?</a>
-                    </div>
-                    
-                </form>
-    
-                <div class="w-full text-center mt-3">
-                    <button (click)="toggleCreateAccount()" type="submit" class="bg-green-500 px-2 rounded-md text-white font-bold py-3  cursor-pointer">Create new account</button>
-                </div>
-            </div>
-        </section>
-        <div *ngIf="createAccount" class="fixed top-0 bottom-0 left-0 right-0 w-screen h-screen">
-            <app-register (close)="toggleCreateAccount()"></app-register>
+<div class="w-full h-full bg-gray-50 dark:bg-black p-3 flex items-center justify-center">
+    <div (click)="toggleDarkMode()" class="absolute right-3 top-3 flex space-x-3  cursor-pointer shadow-md dark:bg-gray-700  p-1 rounded-md">
+        <p class="hover:text-blue-500 dark:text-white">Theme</p>
+        <div>
+            <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-black dark:text-white  fill-current">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
         </div>
-        
     </div>
 
+    <div class="border dark:border-black rounded-md  flex flex-col-reverse md:flex-row md:w-1/2 md:h-2/3  ">
+        <div class="border-b rounded-md bg-gray-100 dark:bg-gray-700 w-full h-full md:flex md:items-center md:justify-center md:flex-col p-3">
+            <h1 class="font-bold text-blue-600 text-5xl">Social App</h1>
+            <p class="break-words mt-3 font-semibold text-xl">Social app helps you connect and share <br> with the people in your life.</p>
+        </div>
+        <div class="border-b rounded-md bg-gray-200 dark:bg-gray-800 h-full w-full flex justify-center items-center flex-col p-3">
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="grid-rows-3 gap-2 w-full">
+                <div class='mb-2 relative flex items-center'>
+                    <input formControlName="email" [ngClass]="{'border-red-500':getEmailValidators()}" class="mb-2  px-4 w-full rounded-md bg-white dark:bg-gray-500 dark:text-white border py-3 " type="text" placeholder="Email or phone">
+                    <!-- <p class="text-red-500 ml-1 absolute inset-y-0 z-20 right-0">Email  is required.</p> -->
+                    <svg *ngIf="getEmailValidators()" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                      
+                </div>
+                <div class="mb-2 relative flex items-center">
+                    <input formControlName="password" [ngClass]="{'border-red-500':loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched}" class="  px-4 w-full rounded-md bg-white dark:bg-gray-500 dark:text-white border py-2 " type="password" placeholder="Password" >
+                    <svg *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched" class="w-6 h-6 text-red-500 absolute right-0 mr-2  " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                </div>
+                <div class="w-full text-center  mb-2">
+                    <button [disabled]="!loginForm.valid" [ngClass]="{'opacity-80':!loginForm.valid}" class="bg-blue-500 w-full rounded-md text-white font-bold py-3 ">Log in</button>
+                </div>
+                <div class="w-full text-center  pb-6 mb-6">
+                    <a  class="text-blue-400 hover:underline hover:cursor-pointer">Forgotten password?</a>
+                </div>
+                
+            </form>
 
+            <div class="w-full text-center mt-3">
+                <button (click)="toggleCreateAccount()" type="submit" class="bg-green-500 px-2 rounded-md text-white font-bold py-3  cursor-pointer">Create new account</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

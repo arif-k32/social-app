@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AuthenticationHttpService } from 'src/app/core/http/api/authentication/authentication-http.service';
 import { FriendsComponent } from './components/friends/friends.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
+// import { NavigationComponent } from './components/navigation/navigation.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostsHttpService } from 'src/app/core/http/api/posts/posts-http.service';
@@ -25,7 +25,7 @@ import { CommentsHttpService } from 'src/app/core/http/api/comments/comments-htt
     HomeComponent,
     FriendsComponent,
     PostsComponent,
-    NavigationComponent,
+    // NavigationComponent,
     NotificationsComponent,
     ExploreComponent,
     AddNewFriendsComponent,

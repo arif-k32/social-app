@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginHttpService } from 'src/app/core/http/api/login/login-http.service';
 import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
@@ -36,7 +36,4 @@ export class LoginComponent {
   
   }
 
- 
-
-  
 }
